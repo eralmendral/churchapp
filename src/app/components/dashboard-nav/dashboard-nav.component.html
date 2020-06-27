@@ -1,0 +1,32 @@
+
+<clr-header class="header-7">
+    <div class="branding">
+        <a href="..." class="nav-link">
+            <span class="title">Churchapp</span>
+        </a>
+    </div>
+    <div class="header-nav" [clr-nav-level]="1">
+        <a routerLink="/dashboard" class="nav-link"><span class="nav-text">Dashboard</span></a>
+        <a routerLink="/dashboard/users" class="nav-link"><span class="nav-text">Users</span></a>
+        <a routerLink="/dashboard/networks" class="nav-link"><span class="nav-text">Networks</span></a>
+        <a routerLink="/dashboard/cellgroups" class="nav-link"><span class="nav-text">Cellgroups</span></a>
+        <a routerLink="/dashboard/vips" class="nav-link"><span class="nav-text">VIPs</span></a>
+        <a routerLink="/dashboard/training" class="nav-link"><span class="nav-text">Training</span></a>
+        <a routerLink="/dashboard/reports" class="nav-link"><span class="nav-text">Reporting</span></a>
+        <a routerLink="/dashboard/bookings" class="nav-link"><span class="nav-text">Bookings</span></a>
+        <a routerLink="/dashboard/events" class="nav-link"><span class="nav-text">Events</span></a>
+        <a routerLink="/dashboard/settings" class="nav-link"><span class="nav-text">Settings</span></a>
+    </div>
+    <div class="header-actions">
+        <clr-dropdown>
+            <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+                ID
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                <a routerLink="/login" clrDropdownItem>Log out</a>
+            </clr-dropdown-menu>
+        </clr-dropdown>
+    </div>
+</clr-header>
+

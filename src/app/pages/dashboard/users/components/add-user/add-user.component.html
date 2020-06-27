@@ -1,0 +1,37 @@
+
+<form clrForm [formGroup]="userForm">
+    <clr-input-container>
+        <label>ID</label>
+        <input clrInput type="text" formControlName="id" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>First name</label>
+        <input clrInput type="text" formControlName="firstname" />
+        <clr-control-error></clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Last name</label>
+        <input clrInput type="text" formControlName="lastname" />
+        <clr-control-error></clr-control-error>
+    </clr-input-container>
+
+
+<clr-control-container>
+    <label>Gender</label>
+    <ng-select clrControl formControlName="gender">
+        <ng-option value="Male">Male</ng-option>
+        <ng-option value="Female">Female</ng-option>
+    </ng-select>
+</clr-control-container>
+
+<clr-control-container>
+    <label>Network</label>
+    <ng-select clrControl formControlName="gender">
+        <ng-option value="Male">Male</ng-option>
+        <ng-option value="Female">Female</ng-option>
+    </ng-select>
+</clr-control-container>
+
+
+
+</form>
