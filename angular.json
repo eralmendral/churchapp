@@ -28,8 +28,10 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles.scss",
               "node_modules/@clr/icons/clr-icons.min.css",
-              "node_modules/@clr/ui/clr-ui.min.css"
+              "node_modules/@clr/ui/clr-ui.min.css",
+              "node_modules/bootstrap-4-grid/scss/grid.scss"
             ],
             "scripts": [
               "node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js",

@@ -28,6 +28,7 @@
     "ag-grid-angular": "^23.2.1",
     "ag-grid-community": "^23.2.1",
     "angularfire2": "^5.4.2",
+    "bootstrap-4-grid": "^3.4.0",
     "firebase": "^7.15.4",
     "rxjs": "~6.5.4",
     "rxjs-compat": "^6.5.5",

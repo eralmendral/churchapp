@@ -17,7 +17,8 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    pathMatch: 'full',
+    redirectTo: 'dashboard/users'
   },
   {
     path: 'login',

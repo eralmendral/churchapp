@@ -1,1 +1,37 @@
-<h3>Users</h3>
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col">
+        <div class="d-flex  justify-content-end">
+            <button class="btn btn-outline" (click)="showAddUser()">Add User</button>
+        </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col sm">
+            <ag-grid-angular ag-grid-angular
+                style="width: 100%; height: 500px;"
+                class="ag-theme-alpine"
+                [rowData]="users | async"
+                [columnDefs]="columnDefs"
+                rowSelection="multiple"
+                pagination="true"
+                paginationAutoPageSize="true"
+                autoSize
+            >
+            </ag-grid-angular>
+        </div>
+    </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'xl'" [clrModalStaticBackdrop]="false">
+    <h3 class="modal-title">I have a nice title</h3>
+    <div class="modal-body">
+        <p>But not much to say...</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="basic = false">Ok</button>
+    </div>
+    <div class="modal-backdrop" aria-hidden="true"></div>
+</clr-modal>

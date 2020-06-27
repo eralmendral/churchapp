@@ -6,4 +6,28 @@
     @include ag-theme-alpine();
 }
 
-button:focus {outline:0;}
+body {
+    overflow-x: hidden;
+}
+
+.modal-content{
+    position: fixed;
+    height: 1000px;
+    width: 80vw;
+    border-radius: 0 !important;
+    top: 0;
+    animation: show-from-right-animation 1s cubic-bezier(1, 0.610, 0.355, 1) forwards;
+}
+
+.modal-dialog {
+    right: -100%;
+}
+
+@keyframes show-from-right-animation {
+    from {
+        right: -100%;
+    }
+    to {
+        right: 0%;
+    }
+}

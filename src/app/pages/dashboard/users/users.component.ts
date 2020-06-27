@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Component, OnInit } from '@angular/core';
-
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -9,30 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
   basic = false;
+  pageSize = '1';
   columnDefs = [
-    { headerName: 'Action', field: 'action' },
+    { headerName: 'Action', field: 'action'},
     { headerName: 'Image', field: 'image' },
-    { headerName: 'ID', field: 'id' },
-    { headerName: 'Name', field: 'name' },
-    { headerName: 'Network', field: 'network' },
-    { headerName: 'Phone', field: 'phone' },
-    { headerName: 'Email', field: 'email' }
+    { headerName: 'ID', field: 'id', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Firstname', field: 'firstname', filter: 'agTextColumnFilter', sortable: true },
+    { headerName: 'Lastname', field: 'lastname', filter: 'agTextColumnFilter' , sortable: true },
+    { headerName: 'Network', field: 'network', filter: 'agTextColumnFilter' , sortable: true },
+    { headerName: 'Phone', field: 'phone', filter: 'agTextColumnFilter' , sortable: true },
+    { headerName: 'Email', field: 'email', filter: 'agTextColumnFilter' , sortable: true }
   ];
 
-  rowData = []
-  constructor(private afs: AngularFirestore) { }
+  users: Observable<any[]>
+  usersCollection;
+  constructor(private afs: AngularFirestore,) {
+    this.usersCollection = afs.collection('users');
+    this.users = this.usersCollection.valueChanges();
+  }
 
   ngOnInit(): void {
-    this.afs.collection('users').snapshotChanges().subscribe(snaps => {
-        snaps.map(snap => {
+    this.afs.collection('users').snapshotChanges().pipe(map(actions => actions.map(a => {
 
-        const data = snap.payload.doc.data();
-        const id = snap.payload.doc.id;
+    })));
+  }
 
-        console.log(id, data);
-
-      })
-    })
+  showAddUser(){
+    this.basic = true;
   }
 
 }
