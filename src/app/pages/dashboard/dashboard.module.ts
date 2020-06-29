@@ -15,6 +15,9 @@ import { BookingComponent } from './booking/booking.component';
 import { EventsComponent } from './events/events.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SharedComponentsModule } from './../../sharedcomponents/sharedcomponents.module';
+import { StoreModule } from '@ngrx/store';
+import * as fromDashboard from './reducers';
+import { dashboardReducer } from './reducers';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { SharedComponentsModule } from './../../sharedcomponents/sharedcomponent
     ReactiveFormsModule,
     FormsModule,
     DashboardRoutingModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    StoreModule.forFeature('dashboard', dashboardReducer)
   ],
   exports: [],
   providers: [],

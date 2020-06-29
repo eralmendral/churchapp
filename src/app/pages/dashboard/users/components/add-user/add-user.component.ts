@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { DashboardState } from '../../../reducers';
+import { Store } from '@ngrx/store';
+import { addUser } from '../../../dashboard.actions';
 
 @Component({
   selector: 'app-add-user',
@@ -9,7 +12,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
-  constructor (private storage: AngularFireStorage, private afs: AngularFirestore) { }
+  constructor (private storage: AngularFireStorage, private afs: AngularFirestore, private store: Store<DashboardState>) { }
 
   userForm = new FormGroup({
     userData: new FormGroup({
@@ -42,14 +45,15 @@ export class AddUserComponent implements OnInit {
 
   onAddUser() {
     const data = this.userForm.value;
-    data.userData.profile_pic = ''
-    data.userProfile.id = data.userData.id;
 
-    const { id, network,firstname, lastname, gender, phone, email } = data.userData;
+    // const { id, network,firstname, lastname, gender, phone, email } = data.userData;
     const { birthdate, workplace } = data.userProfile;
     const { unit,street, barangay, city } = data.userProfile.userAddress;
 
-    this.afs.collection('users').doc(id).set(data.userData);
-    this.afs.collection('profile').doc(id).set(data.userProfile);
+    console.log('test')
+    this.store.dispatch(addUser({ user: data.userData }));
+    // this.afs.collection('users').doc(id).set(data.userData);
+    // this.afs.collection('profile').doc(id).set(data.userProfile);
+    this.userForm.reset();
   }
 }

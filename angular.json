@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "churchapp"
+  "defaultProject": "churchapp",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

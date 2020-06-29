@@ -6,6 +6,8 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { DashboardRoutingModule } from '../dashboard-routing.module';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-users',
@@ -25,7 +27,7 @@ export class UsersComponent implements OnInit
   public defaultColDef;
   public getRowHeight;
 
-  constructor (private afs: AngularFirestore)
+  constructor (private afs: AngularFirestore, private store: Store<DashboardRoutingModule>)
   {
     this.usersCollection = afs.collection('users');
     this.users = this.usersCollection.valueChanges();
