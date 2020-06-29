@@ -1,37 +1,93 @@
-
 <form clrForm [formGroup]="userForm">
+
+
+  <div formGroupName="userData">
+
     <clr-input-container>
-        <label>ID</label>
-        <input clrInput type="text" formControlName="id" />
-    </clr-input-container>
-    <clr-input-container>
-        <label>First name</label>
-        <input clrInput type="text" formControlName="firstname" />
-        <clr-control-error></clr-control-error>
-    </clr-input-container>
-    <clr-input-container>
-        <label>Last name</label>
-        <input clrInput type="text" formControlName="lastname" />
-        <clr-control-error></clr-control-error>
+      <label>ID</label>
+      <input clrInput formControlName="id" />
     </clr-input-container>
 
+    <clr-select-container>
+      <label>Network</label>
+      <select clrSelect name="options" formControlName="network">
+         <option value="123m">123m</option>
+         <option value="123f">123f</option>
+      </select>
+    </clr-select-container>
 
-<clr-control-container>
-    <label>Gender</label>
-    <ng-select clrControl formControlName="gender">
-        <ng-option value="Male">Male</ng-option>
-        <ng-option value="Female">Female</ng-option>
-    </ng-select>
-</clr-control-container>
+    <clr-select-container>
+      <label>Cell Group</label>
+      <select clrSelect name="options" formControlName="cellgroup">
+        <option value="123mc">123mc</option>
+         <option value="123fc">123fc</option>
+      </select>
+    </clr-select-container>
 
-<clr-control-container>
-    <label>Network</label>
-    <ng-select clrControl formControlName="gender">
-        <ng-option value="Male">Male</ng-option>
-        <ng-option value="Female">Female</ng-option>
-    </ng-select>
-</clr-control-container>
+    <clr-input-container>
+      <label>Firstname</label>
+      <input clrInput formControlName="firstname" />
+    </clr-input-container>
+
+    <clr-input-container>
+      <label>Lastname</label>
+      <input clrInput formControlName="lastname" />
+    </clr-input-container>
+
+    <!-- gender -->
+    <clr-select-container>
+      <label>Gender</label>
+      <select clrSelect name="options" formControlName="gender">
+        <option value="male">male</option>
+        <option value="female">female</option>
+      </select>
+    </clr-select-container>
+
+    <clr-input-container>
+      <label>Phone</label>
+      <input clrInput formControlName="phone" />
+    </clr-input-container>
+
+    <clr-input-container>
+      <label>Email</label>
+      <input clrInput formControlName="email" />
+    </clr-input-container>
+  </div>
+
+  <br />
+
+  <div formGroupName="userProfile">
+    <clr-input-container>
+      <label>Birthdate</label>
+      <input clrInput formControlName="birthdate" />
+    </clr-input-container>
+
+    <span>Address</span>
+
+    <div formGroupName="userAddress">
+      <clr-input-container>
+        <label>Unit</label>
+        <input clrInput formControlName="unit" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Street</label>
+        <input clrInput formControlName="street" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Barangay</label>
+        <input clrInput formControlName="barangay" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>City</label>
+        <input clrInput formControlName="city" />
+      </clr-input-container>
+    </div>
+
+    <clr-input-container>
+      <label>Workplace</label>
+      <input clrInput formControlName="workplace" />
+    </clr-input-container>
 
 
-
+  </div>
 </form>
