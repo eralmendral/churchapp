@@ -1,12 +1,12 @@
+import { User } from './../../interfaces/dashboard/User';
 import { createAction, props } from '@ngrx/store';
 
-
 export const addUser = createAction(
-    "[Users Page] Add User",
-    props<{user : any}>()
+    "[User Page] Add User",
+    props<{user : User}>()
 )
 
 export const removeUser = createAction(
-    "[Users Page] Remove User",
-    props<{user : any}>()
+    "[User Page] Remove User",
+    props<{user : User}>()
 )

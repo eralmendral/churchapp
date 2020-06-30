@@ -23,7 +23,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { SharedComponentsModule } from './sharedcomponents/sharedcomponents.module';
 import { UsersModule } from './pages/dashboard/users/users.module';
+import { EffectsModule } from '@ngrx/effects';
+import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 
+// dashboard metaReducers
+import { metaReducers } from './pages//dashboard/reducers';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,8 +48,21 @@ import { UsersModule } from './pages/dashboard/users/users.module';
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     UsersModule,
     SharedComponentsModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreModule.forRoot(null, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictActionSerializability: true,
+        strictStateSerializability: true
+      }
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      routerState: RouterState.Minimal
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

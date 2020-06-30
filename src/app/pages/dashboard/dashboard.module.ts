@@ -16,8 +16,10 @@ import { EventsComponent } from './events/events.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SharedComponentsModule } from './../../sharedcomponents/sharedcomponents.module';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import * as fromDashboard from './reducers';
 import { dashboardReducer } from './reducers';
+import { Dashboardfx } from './dashboard.effects';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { dashboardReducer } from './reducers';
     FormsModule,
     DashboardRoutingModule,
     SharedComponentsModule,
-    StoreModule.forFeature('dashboard', dashboardReducer)
+    StoreModule.forFeature('dashboard', dashboardReducer),
+    EffectsModule.forFeature([Dashboardfx])
   ],
   exports: [],
   providers: [],

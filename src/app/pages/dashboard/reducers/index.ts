@@ -10,11 +10,11 @@ import {
 
 import { environment } from '../../../../environments/environment';
 import { DashboardActions } from '../dashboard.actiontypes';
-
+import { User } from 'src/app/interfaces/dashboard/User';
 export const dashboardFeatureKey = 'dashboard';
 
 export interface DashboardState {
-  users: any;
+  users: User[];
   profiles: any;
   cellgroups: any;
   networks: any;
@@ -30,17 +30,26 @@ export const initialDashboardState: DashboardState = {
 }
 
 // export const reducers: ActionReducerMap<DashboardState> = {
-
+//   router: routerReducer
 // };
-
-// export const metaReducers: MetaReducer<DashboardState>[] = !environment.production ? [] : [];
-
 
 export const dashboardReducer = createReducer<DashboardState>(
   initialDashboardState,
   on(DashboardActions.addUser, (state, action) => {
     return {
-      users: [...state.users, action.user]
+      ...state,
+      user: action.user
     }
   })
 )
+
+export function logger(reducer: ActionReducer<any>) : ActionReducer<any> {
+  return (state, action) => {
+    console.log("state before:", state);
+    console.log("action:", action);
+    return reducer(state, action);
+  }
+}
+export const metaReducers: MetaReducer<DashboardState>[] = !environment.production ? [logger] : [];
+
+

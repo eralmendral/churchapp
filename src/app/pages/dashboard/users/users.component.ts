@@ -31,7 +31,7 @@ export class UsersComponent implements OnInit
   {
     this.usersCollection = afs.collection('users');
     this.users = this.usersCollection.valueChanges();
-
+    
     this.columnDefs = [
         { headerName: 'Action', field: 'action', width: 400, filter: false, cellRenderer: 'actionButtonRenderer' },
         { headerName: 'Image', field: 'profile_pic', cellRenderer: 'profilePicRenderer' },
