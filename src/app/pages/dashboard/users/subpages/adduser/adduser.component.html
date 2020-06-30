@@ -1,0 +1,176 @@
+<div class="container">
+    <div class="row section-title">
+        <div class="col-sm-3">
+            <h1>Add User</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <form clrForm [formGroup]="userForm">
+                <div formGroupName="userData">
+                    <div class="row">
+                        <div class="col-sm-4">
+                          <clr-input-container>
+                            <label>ID</label>
+                            <input clrInput formControlName="id" class="w-75"/>
+                          </clr-input-container>
+                        </div>
+                    </div>
+                  
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <clr-select-container>
+                              <label>Network</label>
+                              <select clrSelect name="options" formControlName="network"  class="w-100">
+                                 <option value="123m">123m111111111</option>
+                                 <option value="123f">1231111111111f</option>
+                              </select>
+                            </clr-select-container>
+                          </div>
+                          <div class="col-sm-12">
+                            <clr-select-container>
+                                <label>Cellgroup</label>
+                                <select clrSelect name="options" formControlName="cellgroup"  class="w-100">
+                                  <option value="123mc">123m111111c</option>
+                                   <option value="123fc">123fc</option>
+                                </select>
+                              </clr-select-container>
+                          </div>
+
+                          <div class="col-sm-12">
+                            <clr-input-container>
+                                <label>Encounter Batch</label>
+                                <input clrInput formControlName="encounterbatch" />
+                              </clr-input-container>
+                          </div>
+                    </div>
+                    <br>
+                    <br>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src='http://unsplash.it/250/250?random&gravity=center' class="rounded-25" alt=''/>
+                        <label class="text-center" for="profile_pic">Upload Picture</label>
+                        <input type="file" accept=".png, .peg, .jpg" name="profile_pic" id="profile_pic">
+                    </div>
+                        
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <clr-input-container>
+                                    <label>Firstname</label>
+                                    <input clrInput formControlName="firstname" />
+                                  </clr-input-container>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <clr-input-container>
+                                    <label>Lastname</label>
+                                    <input clrInput formControlName="lastname" />
+                                </clr-input-container>
+                            </div>
+                        </div>
+                          <!-- gender -->
+                        <clr-select-container>
+                            <label>Gender</label>
+                            <select clrSelect name="options" formControlName="gender">
+                            <option value="male">male</option>
+                            <option value="female">female</option>
+                            </select>
+                        </clr-select-container>
+
+                        <clr-input-container>
+                            <label>Phone</label>
+                            <input clrInput formControlName="phone" />
+                          </clr-input-container>
+                      
+                          <clr-input-container>
+                            <label>Email</label>
+                            <input clrInput formControlName="email" />
+                          </clr-input-container>
+
+                        <clr-date-container>
+                            <label>Birthdate</label>
+                            <input type="date" clrDate formControlName="birthdate" >
+                        </clr-date-container>
+                     </div>
+                </div>  
+                </div>
+              
+               
+                <div formGroupName="userProfile">
+                  <h3 class="text font-weight-bold clr-font-weight-bold" >Address</h3>
+                  <div formGroupName="userAddress">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <clr-input-container>
+                                <label>Unit</label>
+                                <input clrInput formControlName="unit" class="w-100" />
+                            </clr-input-container>
+                        </div>
+                        <div class="col-sm-4">
+                            <clr-input-container>
+                                <label>Street</label>
+                                <input clrInput formControlName="street" class="w-100"/>
+                            </clr-input-container>
+                        </div>
+                        <div class="col-sm-4">
+                            <clr-input-container>
+                                <label>Brgy</label>
+                                <input clrInput formControlName="barangay" class="w-100" />
+                            </clr-input-container>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <clr-input-container>
+                                <label>City</label>
+                                <input clrInput formControlName="city" />
+                              </clr-input-container>
+                        </div>
+                        <div class="col-sm-6">
+                            <clr-input-container>
+                                <label>Province</label>
+                                <input clrInput formControlName="city" />
+                              </clr-input-container>
+                        </div>
+                    </div>
+                  </div>
+                  
+                  
+                  <br>
+                  <div class="row">
+                      <div class="col">
+                        <clr-input-container>
+                            <label>Workplace</label>
+                            <input clrInput formControlName="workplace" />
+                          </clr-input-container>
+                      </div>
+                  </div>
+                  
+
+                    <div class="row">
+                        <div class="col">
+                        <clr-input-container>
+                            <label>Campus</label>
+                            <input clrInput formControlName="campus" />
+                            </clr-input-container>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mt-5">
+               
+                <div class="row mt-5">
+                    <div class="col">
+                        <button class="btn btn-danger btn-fixed-cancel">Cancel</button>
+                        <button class="btn btn-success btn-fixed-save" (click)="addUser()">Save</button>
+                    </div>
+                </div>
+              </form>
+              
+        </div>
+    </div>
+
+</div>

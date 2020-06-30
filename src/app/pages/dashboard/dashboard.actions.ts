@@ -10,3 +10,8 @@ export const removeUser = createAction(
     "[User Page] Remove User",
     props<{user : User}>()
 )
+
+export const fetchUsers = createAction(
+    "[User] Fetch User",
+    props<{users: User[]}>()
+)

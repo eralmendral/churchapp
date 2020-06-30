@@ -20,6 +20,8 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromDashboard from './reducers';
 import { dashboardReducer } from './reducers';
 import { Dashboardfx } from './dashboard.effects';
+import { RouterModule } from '@angular/router';
+import { NetworksModule } from './networks/networks.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { Dashboardfx } from './dashboard.effects';
     ClarityModule,
     ReactiveFormsModule,
     FormsModule,
+    RouterModule,
+    NetworksModule,
     DashboardRoutingModule,
     SharedComponentsModule,
     StoreModule.forFeature('dashboard', dashboardReducer),

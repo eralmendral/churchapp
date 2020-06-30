@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row section-title">
+        <div class="col">
+            <h1>Networks</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="d-flex  justify-content-end">
+                <button class="btn btn-outline" routerLink="add">Add Network</button>
+                <button class="btn btn-success-outline">Export</button>
+            </div>
+        </div>
+    </div>
+
+     <div class="row">
+        <div class="col sm">
+            <ag-grid-angular ag-grid-angular
+                style="width: 100wh; height: 80vh;"
+                class="ag-theme-alpine"
+                [rowData]="networks$ | async"
+                [columnDefs]="columnDefs"
+                [defaultColDef]="defaultColDef"
+                pagination="true"
+                pageSize="10"
+                paginationAutoPageSize="false"
+                [frameworkComponents]="frameworkComponents"
+            >
+            </ag-grid-angular>
+        </div> 
+    </div> 
+</div>

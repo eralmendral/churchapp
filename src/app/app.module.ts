@@ -26,8 +26,6 @@ import { UsersModule } from './pages/dashboard/users/users.module';
 import { EffectsModule } from '@ngrx/effects';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 
-// dashboard metaReducers
-import { metaReducers } from './pages//dashboard/reducers';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,8 +46,7 @@ import { metaReducers } from './pages//dashboard/reducers';
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     UsersModule,
     SharedComponentsModule,
-    StoreModule.forRoot(null, {
-      metaReducers,
+    StoreModule.forRoot({}, {
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,

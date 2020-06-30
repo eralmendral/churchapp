@@ -82,3 +82,108 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #33302b;
 }
+
+
+
+// fonts 
+.fontsize10 {
+  font-size: 10px !important;
+}
+
+.fontsize12 {
+  font-size: 12px !important;
+}
+
+.fontsize16 {
+  font-size: 16px !important;
+}
+
+.fontsize18 {
+  font-size: 18px !important;
+}
+
+form label, form input, form select {
+  font-size: 16px !important;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
+// width 
+
+.w-25 {
+  width: 25% !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.w-75 {
+  width: 75% !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.rounded-25 {
+  border-radius: 25% !important;
+}
+
+.rounded-5 {
+  border: 1px solid grey;
+  border-radius: 5% !important;
+}
+
+
+
+.circle{
+  border-radius: 50% !important;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .btn-fixed-save{
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    width: 8%;
+    height: 5%;
+  }
+  
+  .btn-fixed-cancel{
+    position: fixed;
+    bottom: 5%;
+    right: 14%;
+    width: 8%;
+    height: 5%;
+  }
+}
+

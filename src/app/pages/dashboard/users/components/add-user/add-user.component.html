@@ -3,26 +3,38 @@
 
   <div formGroupName="userData">
 
-    <clr-input-container>
-      <label>ID</label>
-      <input clrInput formControlName="id" />
-    </clr-input-container>
+    <div class="row">
+      <div class="col-sm-4">
+        <clr-input-container>
+          <label>ID</label>
+          <input clrInput formControlName="id" />
+        </clr-input-container>
+      </div>
 
-    <clr-select-container>
-      <label>Network</label>
-      <select clrSelect name="options" formControlName="network">
-         <option value="123m">123m</option>
-         <option value="123f">123f</option>
-      </select>
-    </clr-select-container>
+      <div class="col-sm-4">
+        Test
+      </div>
+      <!-- <div class="col-sm-4">
+        <clr-select-container>
+          <label>Network</label>
+          <select clrSelect name="options" formControlName="network">
+             <option value="123m">123m</option>
+             <option value="123f">123f</option>
+          </select>
+        </clr-select-container>
+      </div>
 
-    <clr-select-container>
-      <label>Cell Group</label>
-      <select clrSelect name="options" formControlName="cellgroup">
-        <option value="123mc">123mc</option>
-         <option value="123fc">123fc</option>
-      </select>
-    </clr-select-container>
+      <div class="col-sm-1">
+        <clr-select-container>
+          <label>Cell Group</label>
+          <select clrSelect name="options" formControlName="cellgroup">
+            <option value="123mc">123mc</option>
+             <option value="123fc">123fc</option>
+          </select>
+        </clr-select-container>
+      </div> -->
+    </div>
+
 
     <clr-input-container>
       <label>Firstname</label>

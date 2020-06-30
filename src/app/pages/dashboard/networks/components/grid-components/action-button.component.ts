@@ -4,8 +4,8 @@ import { Router,  ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-action-button',
-  template: '<button class="btn btn-outline" (click)="viewUser()">View</button>' +
-            `<button class="btn btn-success-outline" (click)="editUser()">Edit</button>`
+  template: '<button class="btn btn-outline" (click)="viewNetwork()">View</button>' +
+            `<button class="btn btn-success-outline" (click)="editNetwork()">Edit</button>`
 })
 export class ActionButtonComponent implements ICellRendererAngularComp
 {
@@ -23,14 +23,11 @@ export class ActionButtonComponent implements ICellRendererAngularComp
     return false;
   }
 
-  test(){
-    console.log(this.params.data);
-  }
-  viewUser(){
+  viewNetwork(){
     this.router.navigate(['view', this.params.data.id], { relativeTo: this.route})
   }
 
-  editUser(){
+  editNetwork(){
     this.router.navigate(['edit', this.params.data.id], { relativeTo: this.route})
   }
 }

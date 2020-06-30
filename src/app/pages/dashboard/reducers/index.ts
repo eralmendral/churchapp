@@ -38,7 +38,13 @@ export const dashboardReducer = createReducer<DashboardState>(
   on(DashboardActions.addUser, (state, action) => {
     return {
       ...state,
-      user: action.user
+      users: [...state.users, action.user]
+    }
+  }),
+  on(DashboardActions.fetchUsers, (state, action) => {
+    return { 
+      ...state,
+      users: action.users
     }
   })
 )
