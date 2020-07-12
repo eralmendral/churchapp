@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './auth.service';
-import { ClarityModule } from '@clr/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import * as fromAuth from './reducers';
@@ -15,7 +14,6 @@ import { AuthEffects } from './auth.effects';
   declarations: [ LoginComponent ],
   imports: [
     CommonModule,
-    ClarityModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([{ path: 'login', component: LoginComponent }]),

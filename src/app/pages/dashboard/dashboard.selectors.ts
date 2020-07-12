@@ -3,7 +3,7 @@ import { DashboardState } from './reducers';
 
 export const selectDashboardState = createFeatureSelector<DashboardState>("dashboard");
 
-export const users = createSelector(
+export const selectUsers = createSelector(
     selectDashboardState,
     dashboard => dashboard.users
 )
@@ -13,7 +13,7 @@ export const profiles = createSelector(
     dashboard => dashboard.profiles
 )
 
-export const networks = createSelector(
+export const selectNetworks = createSelector(
     selectDashboardState,
     dashboard => dashboard.networks
 )

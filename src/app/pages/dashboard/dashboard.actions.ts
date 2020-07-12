@@ -11,7 +11,22 @@ export const removeUser = createAction(
     props<{user : User}>()
 )
 
-export const fetchUsers = createAction(
-    "[User] Fetch User",
-    props<{users: User[]}>()
+
+
+export const loadAllUsers = createAction(
+    "[User Resolver] Load All Users",
+)
+
+export const allUsersLoaded = createAction(
+    "[Load Users Effect] All Users Loaded",
+    props<{users: any[]}>()
+)
+
+export const loadAllNetworks = createAction(
+    "[Network Resolver] Load All Networks",
+)
+
+export const allNetworksLoaded = createAction(
+    "[Load Networks Effect] All Networks Loaded",
+    props<{networks: any[]}>()
 )

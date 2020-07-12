@@ -35,16 +35,16 @@ export const initialDashboardState: DashboardState = {
 
 export const dashboardReducer = createReducer<DashboardState>(
   initialDashboardState,
-  on(DashboardActions.addUser, (state, action) => {
-    return {
-      ...state,
-      users: [...state.users, action.user]
-    }
-  }),
-  on(DashboardActions.fetchUsers, (state, action) => {
+  on(DashboardActions.allUsersLoaded, (state, action) => {
     return { 
       ...state,
       users: action.users
+    }
+  }),
+  on(DashboardActions.allNetworksLoaded, (state, action) => {
+    return { 
+      ...state,
+      networks: action.networks
     }
   })
 )

@@ -1,27 +1,43 @@
+import { UsersModule } from './pages/users/users.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 
-import { ClarityModule } from '@clr/angular';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardhomeComponent } from './dashboardhome/dashboardhome.component';
-import { NetworksComponent } from './networks/networks.component';
-import { CellgroupComponent } from './cellgroup/cellgroup.component';
-import { VipsComponent } from './vips/vips.component';
-import { TrainingComponent } from './training/training.component';
-import { ReportsComponent } from './reports/reports.component';
-import { BookingComponent } from './booking/booking.component';
-import { EventsComponent } from './events/events.component';
-import { SettingsComponent } from './settings/settings.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardhomeComponent } from './pages/dashboardhome/dashboardhome.component';
+import { NetworksComponent } from './pages/networks/networks.component';
+import { CellgroupComponent } from './pages/cellgroup/cellgroup.component';
+import { VipsComponent } from './pages/vips/vips.component';
+import { TrainingComponent } from './pages/training/training.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { BookingComponent } from './pages/booking/booking.component';
+import { EventsComponent } from './pages/events/events.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { NetworksModule } from './pages/networks/networks.module';
+
 import { SharedComponentsModule } from './../../sharedcomponents/sharedcomponents.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromDashboard from './reducers';
 import { Dashboardfx } from './dashboard.effects';
 import { RouterModule } from '@angular/router';
-import { NetworksModule } from './networks/networks.module';
+import { UsersResolver } from './resolvers/users.resolver';
+import { UsersEffects } from './effects/users.effects';
+import { UsersService } from './services/users.service';
+import { NetworkEffects } from './effects/networks.effects';
 
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { IconsProviderModule } from 'src/app/icons-provider.module';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -36,17 +52,23 @@ import { NetworksModule } from './networks/networks.module';
     SettingsComponent,
   ],
   imports: [
-    ClarityModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
     NetworksModule,
+    UsersModule,
     DashboardRoutingModule,
     SharedComponentsModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzFormModule,
+    NzInputModule,
+    NzIconModule,
     StoreModule.forFeature('dashboard', fromDashboard.dashboardReducer),
-    EffectsModule.forFeature([Dashboardfx])
+    EffectsModule.forFeature([Dashboardfx, UsersEffects, NetworkEffects])
   ],
-  exports: [],
-  providers: [],
+  exports: [UsersModule],
+  providers: [ UsersResolver, UsersService ],
 })
 export class DashboardModule { }

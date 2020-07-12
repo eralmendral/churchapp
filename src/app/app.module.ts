@@ -22,12 +22,21 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { SharedComponentsModule } from './sharedcomponents/sharedcomponents.module';
-import { UsersModule } from './pages/dashboard/users/users.module';
 import { EffectsModule } from '@ngrx/effects';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import { AuthModule } from './pages/auth/auth.module';
 import * as fromAppState from './reducers';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { IconsProviderModule } from './icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+
+registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +55,7 @@ import { RouterModule } from '@angular/router';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    UsersModule,
+  
     SharedComponentsModule,
     StoreModule.forRoot(fromAppState.reducers, {
       runtimeChecks: {
@@ -62,8 +71,12 @@ import { RouterModule } from '@angular/router';
       stateKey: 'router',
       routerState: RouterState.Minimal
     }),
+    HttpClientModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

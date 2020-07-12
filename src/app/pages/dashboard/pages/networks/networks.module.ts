@@ -6,8 +6,9 @@ import { EditnetworkComponent } from './subpages/editnetwork/editnetwork.compone
 import { ViewnetworkComponent } from './subpages/viewnetwork/viewnetwork.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ClarityModule } from '@clr/angular';
 import { AgGridModule } from 'ag-grid-angular';
+import { NetworkService } from '../../services/network.service';
+import { NetworkResolver } from '../../resolvers/networks.resolver';
 
 
 @NgModule({
@@ -22,8 +23,11 @@ import { AgGridModule } from 'ag-grid-angular';
     ReactiveFormsModule,
     RouterModule,
     FormsModule,
-    ClarityModule,
     AgGridModule.withComponents([]),
+  ],
+  providers: [
+    NetworkService,
+    NetworkResolver
   ]
 })
 export class NetworksModule { }

@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { DashboardState } from '../../../reducers';
-import { Store } from '@ngrx/store';
-import { addUser } from '../../../dashboard.actions';
 
 @Component({
   selector: 'app-adduser',
@@ -12,18 +9,25 @@ import { addUser } from '../../../dashboard.actions';
   styleUrls: ['./adduser.component.scss']
 })
 export class AdduserComponent implements OnInit {
-  networks;
-  cellgroups;
+  networks$;
+  cellgroups$;
   users;
-
+  imageSrc;
 
   constructor(private afs: AngularFirestore) {
     this.users = this.afs.collection('users').valueChanges();
-    this.cellgroups = this.afs.collection('cellgroups').valueChanges();
-    this.networks = this.afs.collection('networks').valueChanges();
+    this.cellgroups$ = this.afs.collection('cellgroups').valueChanges();
+    this.networks$ = this.afs.collection('networks').valueChanges();
    }
 
   ngOnInit(): void {
+    this.networks$.subscribe(data => {
+      console.log('debug:', data)
+    })
+
+    this.cellgroups$.subscribe(data => {
+      console.log('debug cellgroup:', data)
+    })
   }
 
   userForm = new FormGroup({
@@ -53,5 +57,15 @@ export class AdduserComponent implements OnInit {
 
   addUser() {
     console.log('add user');
+  }
+
+  readURL(event: Event): void {
+     let eventFile = (<HTMLInputElement>event.target);
+      if (eventFile.files && eventFile.files[0]) {
+          const file = eventFile.files[0];  
+          const reader = new FileReader();
+          reader.onload = e => this.imageSrc = reader.result;
+          reader.readAsDataURL(file);
+      }
   }
 }

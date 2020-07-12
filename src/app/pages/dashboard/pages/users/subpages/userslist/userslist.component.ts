@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { DashboardRoutingModule } from '../../../dashboard-routing.module';
 import { ProfilePicComponent } from '../../components/grid-components/profile-pic.component';
 import { ActionButtonComponent } from '../../components/grid-components/action-button.component';
-import { Observable } from 'rxjs/Observable';
+import { Store, select } from '@ngrx/store';
+import { DashboardState } from 'src/app/pages/dashboard/reducers';
+import { selectUsers } from 'src/app/pages/dashboard/dashboard.selectors';
 
 @Component({
   selector: 'app-userslist',
@@ -14,7 +15,7 @@ export class UserslistComponent implements OnInit, OnDestroy {
 
   pageSize = '1';
 
-  users;
+  users$;
   networks = {};
   usersCollection;
   networksCollection;
@@ -23,26 +24,8 @@ export class UserslistComponent implements OnInit, OnDestroy {
   public defaultColDef;
   public getRowHeight;
 
-  constructor (private afs: AngularFirestore)
+  constructor (private store: Store<DashboardState>)
   {
-    this.networksCollection =  this.afs.collection('networks').valueChanges();
-    this.networksCollection.subscribe((networksRes: any) => {
-      networksRes.forEach((network: any, index) => {
-         this.networks[network.id] = { name: network.name , leader: network.leader, id: network.id };
-      })
-    });
-    
-    this.usersCollection = this.afs.collection('users').valueChanges();
-    this.usersCollection.subscribe(res => {
-        res.forEach(user => {
-          if(user.network){
-              user.network =  this.networks[user.network].name
-          }
-        })
-
-      this.users = res;
-    });
-
     this.columnDefs = [
         { headerName: 'Action', field: 'action', width: 400, filter: false, cellRenderer: 'actionButtonRenderer' },
         { headerName: 'Image', field: 'profile_pic', cellRenderer: 'profilePicRenderer', filter: false, },
@@ -68,7 +51,13 @@ export class UserslistComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.fetchUsers();
+   }
+
+   fetchUsers() {
+      this.users$ = this.store.pipe(select(selectUsers));
+   }
 
   ngOnDestroy(): void {
     
