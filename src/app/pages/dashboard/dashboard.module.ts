@@ -18,7 +18,6 @@ import { SharedComponentsModule } from './../../sharedcomponents/sharedcomponent
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromDashboard from './reducers';
-import { dashboardReducer } from './reducers';
 import { Dashboardfx } from './dashboard.effects';
 import { RouterModule } from '@angular/router';
 import { NetworksModule } from './networks/networks.module';
@@ -44,7 +43,7 @@ import { NetworksModule } from './networks/networks.module';
     NetworksModule,
     DashboardRoutingModule,
     SharedComponentsModule,
-    StoreModule.forFeature('dashboard', dashboardReducer),
+    StoreModule.forFeature('dashboard', fromDashboard.dashboardReducer),
     EffectsModule.forFeature([Dashboardfx])
   ],
   exports: [],

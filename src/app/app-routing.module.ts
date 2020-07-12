@@ -1,24 +1,19 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './pages/auth/auth.guard';
+
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'dashboard/users'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'forgotpass',
-    component: LoginComponent
+    redirectTo: 'login'
   },
   {
     path: 'dashboard',
-    loadChildren : () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
+    loadChildren : () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [ AuthGuard ]
+
   }
 ];
 

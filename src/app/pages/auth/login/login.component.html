@@ -1,0 +1,16 @@
+<div class="login-wrapper">
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="login-group">
+            <div>
+                <label class="clr-sr-only">Username</label>
+                <input type="email" formControlName="email"  placeholder="Email" autocomplete="false"/>
+            </div>
+            <div>
+                <label class="clr-sr-only">Password</label>
+                <input type="password" formControlName="password"   placeholder="Password" autocomplete="false"/>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" >Login</button>
+            <p class="text-danger" *ngIf="error">{{error}}</p>
+        </div>
+    </form>
+</div>
