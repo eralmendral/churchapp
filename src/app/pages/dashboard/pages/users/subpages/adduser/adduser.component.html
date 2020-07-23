@@ -1,23 +1,25 @@
 <div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Add User</h3>
+        </div>
+    </div>
+
     <div class="row">
        <div class="col-md-6 col-sm-12">
-         <h1>Add User</h1>
-
          <div class="row">
-
-          
              <div class="col-12">
                 <form nz-form [formGroup]="userForm" (ngSubmit)="addUser()">
                     <div formGroupName="userData">
                         <nz-form-item>
-                            <nz-form-control nzErrorTip="Please input your username!">
+                            <nz-form-control [nzErrorTip]="userForm.get('userData.id').hasError('required') ? 'Field required' :  userForm.get('userData.id').hasError('idtaken') ? 'ID already taken.' : ''">
                               <nz-input-group nzPrefixIcon="idcard">
                                 <input type="text" nz-input formControlName="id" placeholder="ID" />
                               </nz-input-group>
                             </nz-form-control>
                           </nz-form-item>
 
-                       
                          <nz-form-item>
                             <nz-select nzPrefixIcon="lock" nzShowSearch nzAllowClear nzPlaceHolder="Select a Network" >
                                 <nz-option *ngFor="let network of (networks$ | async)" [nzLabel]="network.name" [nzValue]="network.id"></nz-option>
@@ -26,7 +28,7 @@
 
                          <nz-form-item>
                             <nz-select nzPrefixIcon="lock" nzShowSearch nzAllowClear nzPlaceHolder="Select a Cellgroup" >
-                                <nz-option *ngFor="let cellgroup of (cellgroups$ | async)" [nzLabel]="cellgroup.leader" [nzValue]="cellgroup.leader"></nz-option>
+                                <nz-option *ngFor="let cellgroup of (cellgroups$ | async)" [nzLabel]="usersMap[cellgroup.leader] ? usersMap[cellgroup.leader] : cellgroup.leader" [nzValue]="cellgroup.leader"></nz-option>
                             </nz-select>
                          </nz-form-item>
 
@@ -162,7 +164,7 @@
                         <div class="col sm-12">
                             <div class="text-right">
                                 <button class="btn pull-right mr-3" nz-button nzType="danger" [nzSize]="'large'"><i nz-icon nzType="close"></i>Cancel</button>
-                                <button class="btn pull-right" nz-button nzType="primary" [nzSize]="'large'"><i nz-icon nzType="user-add"></i>Add User</button>
+                                <button type="submit" class="btn pull-right" nz-button nzType="primary" [nzSize]="'large'"><i nz-icon nzType="user-add"></i>Add User</button>
                             </div>
                         </div>
                     </div>

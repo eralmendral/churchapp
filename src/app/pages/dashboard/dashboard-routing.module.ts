@@ -20,6 +20,7 @@ import { EditnetworkComponent } from './pages/networks/subpages/editnetwork/edit
 import { ViewnetworkComponent } from './pages/networks/subpages/viewnetwork/viewnetwork.component';
 import { UsersResolver } from './resolvers/users.resolver';
 import { NetworkResolver } from './resolvers/networks.resolver';
+import { CellgroupResolver } from './resolvers/cellgroups.resolver';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
     component: DashboardComponent,
     resolve: {
       users: UsersResolver,
-      networks: NetworkResolver
+      networks: NetworkResolver,
+      cellgroups: CellgroupResolver
     },
     children: [
       { path: '', component: DashboardhomeComponent },

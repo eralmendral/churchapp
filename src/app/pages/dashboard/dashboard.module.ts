@@ -22,9 +22,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromDashboard from './reducers';
 import { Dashboardfx } from './dashboard.effects';
 import { RouterModule } from '@angular/router';
-import { UsersResolver } from './resolvers/users.resolver';
 import { UsersEffects } from './effects/users.effects';
-import { UsersService } from './services/users.service';
 import { NetworkEffects } from './effects/networks.effects';
 
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -38,6 +36,9 @@ import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CellgroupEffects } from './effects/cellgroups.effects';
+import { CellgroupModule } from './pages/cellgroup/cellgroup.module';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -57,6 +58,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     RouterModule,
     NetworksModule,
     UsersModule,
+    CellgroupModule,
     DashboardRoutingModule,
     SharedComponentsModule,
     IconsProviderModule,
@@ -66,9 +68,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzInputModule,
     NzIconModule,
     StoreModule.forFeature('dashboard', fromDashboard.dashboardReducer),
-    EffectsModule.forFeature([Dashboardfx, UsersEffects, NetworkEffects])
+    EffectsModule.forFeature([Dashboardfx, UsersEffects, NetworkEffects, CellgroupEffects])
   ],
   exports: [UsersModule],
-  providers: [ UsersResolver, UsersService ],
 })
 export class DashboardModule { }

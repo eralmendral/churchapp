@@ -46,6 +46,12 @@ export const dashboardReducer = createReducer<DashboardState>(
       ...state,
       networks: action.networks
     }
+  }),
+  on(DashboardActions.allCellgroupsLoaded, (state, action) => {
+    return { 
+      ...state,
+      cellgroups: action.cellgroups
+    }
   })
 )
 

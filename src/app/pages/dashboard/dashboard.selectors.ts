@@ -8,6 +8,8 @@ export const selectUsers = createSelector(
     dashboard => dashboard.users
 )
 
+
+
 export const profiles = createSelector(
     selectDashboardState,
     dashboard => dashboard.profiles
@@ -18,7 +20,7 @@ export const selectNetworks = createSelector(
     dashboard => dashboard.networks
 )
 
-export const cellgroups = createSelector(
+export const selectCellgroups = createSelector(
     selectDashboardState,
     dashboard => dashboard.cellgroups
 )

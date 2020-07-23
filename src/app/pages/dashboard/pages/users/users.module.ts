@@ -18,6 +18,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { UsersResolver } from '../../resolvers/users.resolver';
+import { UsersService } from '../../services/users.service';
+
 @NgModule({
   declarations: [
     UsersComponent,
@@ -43,6 +46,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     NzButtonModule,
     NzDividerModule,
     AgGridModule.withComponents([]),
-    ]
+    ],
+    providers: [ UsersResolver, UsersService  ],
 })
 export class UsersModule { }

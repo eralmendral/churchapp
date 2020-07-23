@@ -11,8 +11,6 @@ export const removeUser = createAction(
     props<{user : User}>()
 )
 
-
-
 export const loadAllUsers = createAction(
     "[User Resolver] Load All Users",
 )
@@ -30,3 +28,13 @@ export const allNetworksLoaded = createAction(
     "[Load Networks Effect] All Networks Loaded",
     props<{networks: any[]}>()
 )
+
+export const loadAllCellgroups = createAction(
+    "[Cellgroup Resolver] Load All Cellgroups",
+)
+
+export const allCellgroupsLoaded = createAction(
+    "[Load Cellgroups Effect] All Cellgroups Loaded",
+    props<{cellgroups: any[]}>()
+)
+
