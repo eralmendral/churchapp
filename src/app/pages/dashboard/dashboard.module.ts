@@ -30,12 +30,9 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
+
+
 import { IconsProviderModule } from 'src/app/icons-provider.module';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CellgroupEffects } from './effects/cellgroups.effects';
 import { CellgroupModule } from './pages/cellgroup/cellgroup.module';
 
@@ -62,11 +59,6 @@ import { CellgroupModule } from './pages/cellgroup/cellgroup.module';
     DashboardRoutingModule,
     SharedComponentsModule,
     IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzFormModule,
-    NzInputModule,
-    NzIconModule,
     StoreModule.forFeature('dashboard', fromDashboard.dashboardReducer),
     EffectsModule.forFeature([Dashboardfx, UsersEffects, NetworkEffects, CellgroupEffects])
   ],

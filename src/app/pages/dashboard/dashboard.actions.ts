@@ -3,7 +3,22 @@ import { createAction, props } from '@ngrx/store';
 
 export const addUser = createAction(
     "[User Page] Add User",
-    props<{user : User}>()
+    props<{user : any}>()
+)
+
+export const userAdded = createAction(
+    "[User Effect] User Added",
+    props<{user : any}>()
+)
+
+export const addProfile = createAction(
+    "[User Page] Add User Profile",
+    props<{profile: any}>()
+)
+
+export const profileAdded = createAction(
+    "[User Effect] Profile Added",
+    props<{profile: any}>()
 )
 
 export const removeUser = createAction(

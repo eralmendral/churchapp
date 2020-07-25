@@ -8,6 +8,10 @@ export const selectUsers = createSelector(
     dashboard => dashboard.users
 )
 
+export const selectUserById =  (id: string) => createSelector(
+    selectUsers,
+    users => users.find(user => user.id === id)
+);
 
 
 export const profiles = createSelector(

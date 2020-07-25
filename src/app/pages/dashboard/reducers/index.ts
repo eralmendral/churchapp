@@ -1,3 +1,4 @@
+import { addUser } from './../dashboard.actions';
 import {
   ActionReducer,
   ActionReducerMap,
@@ -51,6 +52,15 @@ export const dashboardReducer = createReducer<DashboardState>(
     return { 
       ...state,
       cellgroups: action.cellgroups
+    }
+  }),
+
+  // add user
+  on(DashboardActions.userAdded,( state, action) => {
+    console.log("DEBUG Reducer userAdded:", action)
+    return {
+      ...state,
+      users: [action.user, ...state.users]
     }
   })
 )

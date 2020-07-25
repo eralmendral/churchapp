@@ -1,15 +1,29 @@
 <div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+          <nz-breadcrumb>
+            <nz-breadcrumb-item>
+             <a routerLink='/dashboard'>Dashboard</a>
+            </nz-breadcrumb-item>
+            <nz-breadcrumb-item>
+              Users
+            </nz-breadcrumb-item>
+          </nz-breadcrumb>
+        </div>
+      </div>
+
+    <br>
+
     <div class="row section-title">
         <div class="col">
             <h1>Users</h1>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col">
             <div class="d-flex  justify-content-end">
-                <button class="btn btn-outline" routerLink="add">Add User</button>
-                <button class="btn btn-success-outline">Export</button>
+                <button type="submit" class="btn pull-right mx-1" nz-button nzType="danger" [nzSize]="'large'"><i nz-icon nzType="export"></i>Export</button>
+                <button type="submit" class="btn pull-right mx-1" nz-button nzType="primary" [nzSize]="'large'"  routerLink="add"><i nz-icon nzType="user-add"></i>Add User</button>
             </div>
         </div>
     </div>

@@ -1,3 +1,4 @@
+import { SetuserComponent } from './pages/users/subpages/setuser/setuser.component';
 import { UserslistComponent } from './pages/users/subpages/userslist/userslist.component';
 import { DashboardhomeComponent } from './pages/dashboardhome/dashboardhome.component';
 import { SettingsComponent } from './pages/settings/settings.component';
@@ -12,8 +13,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersComponent, } from './pages/users/users.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdduserComponent } from './pages/users/subpages/adduser/adduser.component';
-import { EdituserComponent } from './pages/users/subpages/edituser/edituser.component';
 import { NetworklistComponent } from './pages/networks/subpages/networklist/networklist.component';
 import { AddnetworkComponent } from './pages/networks/subpages/addnetwork/addnetwork.component';
 import { EditnetworkComponent } from './pages/networks/subpages/editnetwork/editnetwork.component';
@@ -21,6 +20,8 @@ import { ViewnetworkComponent } from './pages/networks/subpages/viewnetwork/view
 import { UsersResolver } from './resolvers/users.resolver';
 import { NetworkResolver } from './resolvers/networks.resolver';
 import { CellgroupResolver } from './resolvers/cellgroups.resolver';
+import { UserinfoComponent } from './pages/users/subpages/userinfo/userinfo.component';
+import { UserResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
   {
@@ -41,13 +42,13 @@ const routes: Routes = [
           path: '', component: UserslistComponent
         },
         {
-          path: 'add', component: AdduserComponent
+          path: 'add', component: SetuserComponent
         },
         {
-          path: 'edit/:userId', component: EdituserComponent
+          path: 'edit/:userId', component: SetuserComponent, resolve : { userData: UserResolver }
         },
         {
-          path: 'view/:userId', component: EdituserComponent
+          path: 'view/:userId', component: UserinfoComponent
         }
       ] 
       },

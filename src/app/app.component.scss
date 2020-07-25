@@ -1,8 +1,16 @@
+// regular style toast 
+@import '~ngx-toastr/toastr';
+ 
+
 :host {
   display: flex;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: 'Raleway', sans-serif;
 }
 
 .app-layout {
