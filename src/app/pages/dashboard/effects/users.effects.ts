@@ -20,22 +20,32 @@ export class UsersEffects {
         )
     )
 
+    updateUser$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(DashboardActions.updateUser),
+            concatMap(action => this.userService.fetchusers()),
+            map(users => {
+                this.toastr.success('User Updated!');
+                return allUsersLoaded({ users })
+            })
+        )
+    )
+
     addUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(DashboardActions.addUser),
             concatMap((user: any) => {
                 return this.afs.collection('users').doc(user.id).set(user).then(() => {
                     this.router.navigate(['users']);
-                    this.toastr.success('Successful!');
+                    this.toastr.success('User Added!');
                     return userAdded({ user: user })
                 })
             }),
-
         )
     )
 
-    constructor(private actions$: Actions, private userService: UsersService, 
-                private afs: AngularFirestore, 
-                private router: Router, 
-                private toastr: ToastrService) { }
+    constructor(private actions$: Actions, private userService: UsersService,
+        private afs: AngularFirestore,
+        private router: Router,
+        private toastr: ToastrService) { }
 }

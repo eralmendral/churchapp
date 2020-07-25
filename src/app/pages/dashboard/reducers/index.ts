@@ -1,9 +1,5 @@
-import { addUser } from './../dashboard.actions';
 import {
   ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer,
   createReducer,
   on
@@ -57,12 +53,14 @@ export const dashboardReducer = createReducer<DashboardState>(
 
   // add user
   on(DashboardActions.userAdded,( state, action) => {
-    console.log("DEBUG Reducer userAdded:", action)
     return {
       ...state,
       users: [action.user, ...state.users]
     }
-  })
+  }),
+
+
+
 )
 
 export function logger(reducer: ActionReducer<any>) : ActionReducer<any> {

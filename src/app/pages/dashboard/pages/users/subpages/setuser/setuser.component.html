@@ -1,228 +1,255 @@
 <div class="container-fluid">
 
     <!-- todo: make this as shared component -->
-      <div class="row">
+    <div class="row">
         <div class="col-sm-12">
-          <nz-breadcrumb>
-            <nz-breadcrumb-item>
-             <a routerLink='/dashboard'>Dashboard</a>
-            </nz-breadcrumb-item>
-            <nz-breadcrumb-item>
-              <a routerLink='/users'>Users</a>
-            </nz-breadcrumb-item>
-            <nz-breadcrumb-item>
-               {{mode === 'add' ? 'Add User' : 'Edit User'}}
-            </nz-breadcrumb-item>
-          </nz-breadcrumb>
+            <nz-breadcrumb>
+                <nz-breadcrumb-item>
+                    <a routerLink='/dashboard'>Dashboard</a>
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                    <a routerLink='/users'>Users</a>
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                    {{mode === 'add' ? 'Add User' : 'Edit User'}}
+                </nz-breadcrumb-item>
+            </nz-breadcrumb>
         </div>
-      </div>
-  
-      <br>
-  
-      <div class="row">
-          <div class="col-sm-12">
-              <h1>{{mode === 'add' ? 'Add User' : 'Edit User'}}</h1>
-              <h3 *ngIf="mode === 'edit'">Id: {{userData.id}} </h3>
-          </div>
-      </div>
-  
-      <div class="row">
-         <div class="col-md-6 col-sm-12">
-           <div class="row">
-               <div class="col-12">
-                  <form nz-form [formGroup]="userForm">
-                      <div formGroupName="userData">
-                          <nz-form-item *ngshow="mode === 'add'">
-                              <nz-form-control [nzErrorTip]="userForm.get('userData.id').hasError('required') ? 'Field required' :  userForm.get('userData.id').hasError('idtaken') ? 'ID already taken.' : ''">
-                                <nz-input-group nzPrefixIcon="idcard">
-                                  <input type="text" nz-input formControlName="id" placeholder="ID" />
-                                </nz-input-group>
-                              </nz-form-control>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>{{mode === 'add' ? 'Add User' : 'Edit User'}}</h1>
+            <h3 *ngIf="mode === 'edit'">Id: {{userData.id}} </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+                <div class="col-12">
+                    <form nz-form [formGroup]="userForm">
+                        <div formGroupName="userData">
+                            <nz-form-item *ngshow="mode === 'add'">
+                                <nz-form-control
+                                    [nzErrorTip]="userForm.get('userData.id').hasError('required') ? 'Field required' :  userForm.get('userData.id').hasError('idtaken') ? 'ID already taken.' : ''">
+                                    <nz-input-group nzPrefixIcon="idcard">
+                                        <input type="text" nz-input formControlName="id" placeholder="ID" />
+                                    </nz-input-group>
+                                </nz-form-control>
                             </nz-form-item>
-  
+
                             <nz-form-item>
-                              <nz-form-control nzErrorTip="Encounter Batch Number">
-                                  <nz-select nzPrefixIcon="lock" nzAllowClear nzPlaceHolder="Select a Gender" formControlName="gender">
-                                      <nz-option  nzLabel="Male" nzValue="male"></nz-option>
-                                      <nz-option  nzLabel="Female" nzValue="female"></nz-option>
-                                  </nz-select>
-                              </nz-form-control>
+                                <nz-form-control nzErrorTip="Encounter Batch Number">
+                                    <nz-select nzPrefixIcon="lock" nzAllowClear nzPlaceHolder="Select a Gender"
+                                        formControlName="gender">
+                                        <nz-option nzLabel="Male" nzValue="male"></nz-option>
+                                        <nz-option nzLabel="Female" nzValue="female"></nz-option>
+                                    </nz-select>
+                                </nz-form-control>
                             </nz-form-item>
-  
-                           <nz-form-item>
-                              <nz-select formControlName="network" nzPrefixIcon="lock" nzShowSearch nzAllowClear nzPlaceHolder="Select a Network" >
-                                  <nz-option *ngFor="let network of (networks$ | async)" [nzLabel]="network.name" [nzValue]="network.id"></nz-option>
-                              </nz-select>
-                           </nz-form-item>
-  
-                           <nz-form-item>
-                              <nz-select formControlName="cellgroup" nzPrefixIcon="lock" nzShowSearch nzAllowClear nzPlaceHolder="Select a Cellgroup" >
-                                  <nz-option *ngFor="let cellgroup of (cellgroups$ | async)" [nzLabel]="usersMap[cellgroup.leader] ? usersMap[cellgroup.leader] : cellgroup.leader" [nzValue]="cellgroup.leader"></nz-option>
-                              </nz-select>
-                           </nz-form-item>
-  
-  
-                           <nz-form-item>
-                            <nz-form-control nzErrorTip="Select Level">
-                              <nz-select nzPrefixIcon="lock" nzShowSearch nzAllowClear nzPlaceHolder="Level" formControlName="level" >
-                                <nz-option  nzLabel="12" nzValue="12"></nz-option>
-                                <nz-option  nzLabel="144" nzValue="144"></nz-option>
-                                <nz-option  nzLabel="1728" nzValue="1728"></nz-option>
-                                <nz-option  nzLabel="20736" nzValue="20736"></nz-option>
-                            </nz-select>
-                            </nz-form-control>
-                          </nz-form-item>
-  
-                           <nz-form-item>
-                              <nz-form-control nzErrorTip="Encounter Batch Number">
-                                <nz-input-group nzPrefixIcon="user">
-                                  <input type="text" nz-input formControlName="encounterbatch" placeholder="Encounter Batch" />
-                                </nz-input-group>
-                              </nz-form-control>
-                            </nz-form-item>
-  
+
                             <nz-form-item>
-                              <nz-form-control nzErrorTip="Please input a firstname!">
-                                <nz-input-group nzPrefixIcon="user">
-                                  <input type="text" nz-input formControlName="firstname" placeholder="Firstname" />
-                                </nz-input-group>
-                              </nz-form-control>
+                                <nz-select formControlName="network" nzPrefixIcon="lock" nzShowSearch nzAllowClear
+                                    nzPlaceHolder="Select a Network">
+                                    <nz-option *ngFor="let network of (networks$ | async)" [nzLabel]="network.name"
+                                        [nzValue]="network.id"></nz-option>
+                                </nz-select>
                             </nz-form-item>
-                            
+
                             <nz-form-item>
-                              <nz-form-control nzErrorTip="Please input a lastname!">
-                                <nz-input-group nzPrefixIcon="user">
-                                  <input type="text" nz-input formControlName="lastname" placeholder="Lastname" />
-                                </nz-input-group>
-                              </nz-form-control>
+                                <nz-select formControlName="cellgroup" nzPrefixIcon="lock" nzShowSearch nzAllowClear
+                                    nzPlaceHolder="Select a Cellgroup">
+                                    <nz-option *ngFor="let cellgroup of (cellgroups$ | async)"
+                                        [nzLabel]="usersMap[cellgroup.leader] ? usersMap[cellgroup.leader] : cellgroup.leader"
+                                        [nzValue]="cellgroup.leader"></nz-option>
+                                </nz-select>
                             </nz-form-item>
-  
-  
+
+
                             <nz-form-item>
-                              <nz-form-control nzErrorTip="Please input a phone number!">
-                                <nz-input-group nzPrefixIcon="phone">
-                                  <input type="text" nz-input formControlName="phone" placeholder="Phone number" />
-                                </nz-input-group>
-                              </nz-form-control>
+                                <nz-form-control nzErrorTip="Select Level">
+                                    <nz-select nzPrefixIcon="lock" nzShowSearch nzAllowClear nzPlaceHolder="Level"
+                                        formControlName="level">
+                                        <nz-option nzLabel="12" nzValue="12"></nz-option>
+                                        <nz-option nzLabel="144" nzValue="144"></nz-option>
+                                        <nz-option nzLabel="1728" nzValue="1728"></nz-option>
+                                        <nz-option nzLabel="20736" nzValue="20736"></nz-option>
+                                    </nz-select>
+                                </nz-form-control>
                             </nz-form-item>
-  
+
                             <nz-form-item>
-                              <nz-form-control nzErrorTip="Please input an email address!">
-                                <nz-input-group nzPrefixIcon="mail">
-                                  <input type="email" nz-input formControlName="email" placeholder="Email Address" />
-                                </nz-input-group>
-                              </nz-form-control>
+                                <nz-form-control nzErrorTip="Encounter Batch Number">
+                                    <nz-input-group nzPrefixIcon="user">
+                                        <input type="text" nz-input formControlName="encounterbatch"
+                                            placeholder="Encounter Batch" />
+                                    </nz-input-group>
+                                </nz-form-control>
                             </nz-form-item>
-  
-  
+
                             <nz-form-item>
-                              <nz-form-control nzErrorTip="Please input an email address!">
+                                <nz-form-control nzErrorTip="Please input a firstname!">
+                                    <nz-input-group nzPrefixIcon="user">
+                                        <input type="text" nz-input formControlName="firstname"
+                                            placeholder="Firstname" />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Please input a lastname!">
+                                    <nz-input-group nzPrefixIcon="user">
+                                        <input type="text" nz-input formControlName="lastname" placeholder="Lastname" />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+
+
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Please input a phone number!">
+                                    <nz-input-group nzPrefixIcon="phone">
+                                        <input type="text" nz-input formControlName="phone"
+                                            placeholder="Phone number" />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Please input an email address!">
+                                    <nz-input-group nzPrefixIcon="mail">
+                                        <input type="email" nz-input formControlName="email"
+                                            placeholder="Email Address" />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                            <!-- todo: add soon -->
+                            <!-- <nz-form-item>
+                              <nz-form-control nzErrorTip="Please input a birthdate">
                                   <nz-date-picker nzSize="large" formControlName="birthdate" nzPlaceHolder='Birthdate'></nz-date-picker>
                               </nz-form-control>
-                            </nz-form-item>
-  
-                           
+                            </nz-form-item> -->
+
+
                             <button><i nz-icon nzType="upload"></i>
-                              <label for="profilepic">Upload Profile Image</label>
+                                <label for="profilepic">Upload Profile Image</label>
                             </button>
                             <input type="file" id="profilepic" style="display: none" (change)="readURL($event)">
-                             
-                      </div>
-  
-                      <div formGroupName="userProfile">
-                          <nz-divider nzText="Address"></nz-divider>
-                          <div formGroupName="userAddress">
-                              <div class="row">
-                                  <div class="col-sm-4">
-                                      <nz-form-item>
-                                          <nz-form-control nzErrorTip="Please input a unit or block #.">
-                                            <nz-input-group nzPrefixIcon="mail">
-                                              <input type="text" nz-input formControlName="unit" placeholder="Unit / Block" />
-                                            </nz-input-group>
-                                          </nz-form-control>
+
+                        </div>
+
+                        <div formGroupName="userProfile">
+                            <nz-divider nzText="Address"></nz-divider>
+                            <div formGroupName="userAddress">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <nz-form-item>
+                                            <nz-form-control nzErrorTip="Please input a unit or block #.">
+                                                <nz-input-group nzPrefixIcon="mail">
+                                                    <input type="text" nz-input formControlName="unit"
+                                                        placeholder="Unit / Block" />
+                                                </nz-input-group>
+                                            </nz-form-control>
                                         </nz-form-item>
-                                  </div>
-                                  <div class="col-sm-8">
-                                      <nz-form-item>
-                                          <nz-form-control nzErrorTip="Please input a street,">
-                                            <nz-input-group nzPrefixIcon="mail">
-                                              <input type="text" nz-input formControlName="street" placeholder="Street" />
-                                            </nz-input-group>
-                                          </nz-form-control>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <nz-form-item>
+                                            <nz-form-control nzErrorTip="Please input a street,">
+                                                <nz-input-group nzPrefixIcon="mail">
+                                                    <input type="text" nz-input formControlName="street"
+                                                        placeholder="Street" />
+                                                </nz-input-group>
+                                            </nz-form-control>
                                         </nz-form-item>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-sm-8">
-                                      <nz-form-item>
-                                          <nz-form-control nzErrorTip="Please input a Barangay.">
-                                              <nz-input-group nzPrefixIcon="mail">
-                                              <input type="text" nz-input formControlName="barangay" placeholder="Barangay" />
-                                              </nz-input-group>
-                                          </nz-form-control>
-                                      </nz-form-item>
-                                  </div>
-  
-                                  <div class="col-sm-4">
-                                      <nz-form-item>
-                                          <nz-form-control nzErrorTip="Please input a city">
-                                              <nz-input-group nzPrefixIcon="mail">
-                                              <input type="text" nz-input formControlName="city" placeholder="City" />
-                                              </nz-input-group>
-                                          </nz-form-control>
-                                          </nz-form-item>
-                                  </div>
-                              </div>
-                          </div>
-  
-                          
-                          <nz-divider nzText="Workplace"></nz-divider>
-                          <nz-form-item>
-                              <nz-form-control nzErrorTip="Please input a workplace address!">
-                                <nz-input-group nzPrefixIcon="bank">
-                                  <input type="text" nz-input formControlName="workplace" placeholder="Workplace" />
-                                </nz-input-group>
-                              </nz-form-control>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <nz-form-item>
+                                            <nz-form-control nzErrorTip="Please input a Barangay.">
+                                                <nz-input-group nzPrefixIcon="mail">
+                                                    <input type="text" nz-input formControlName="barangay"
+                                                        placeholder="Barangay" />
+                                                </nz-input-group>
+                                            </nz-form-control>
+                                        </nz-form-item>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <nz-form-item>
+                                            <nz-form-control nzErrorTip="Please input a city">
+                                                <nz-input-group nzPrefixIcon="mail">
+                                                    <input type="text" nz-input formControlName="city"
+                                                        placeholder="City" />
+                                                </nz-input-group>
+                                            </nz-form-control>
+                                        </nz-form-item>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <nz-divider nzText="Workplace"></nz-divider>
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Please input a workplace address!">
+                                    <nz-input-group nzPrefixIcon="bank">
+                                        <input type="text" nz-input formControlName="workplace"
+                                            placeholder="Workplace" />
+                                    </nz-input-group>
+                                </nz-form-control>
                             </nz-form-item>
-  
-                          
+
                             <nz-divider nzText="Campus"></nz-divider>
                             <nz-form-item>
                                 <nz-form-control nzErrorTip="Please input a Campus!">
-                                  <nz-input-group nzPrefixIcon="bank">
-                                    <input type="text" nz-input formControlName="campus" placeholder="Campus" />
-                                  </nz-input-group>
+                                    <nz-input-group nzPrefixIcon="bank">
+                                        <input type="text" nz-input formControlName="campus" placeholder="Campus" />
+                                    </nz-input-group>
                                 </nz-form-control>
-                              </nz-form-item>
-                      </div>
-  
-  
-                      <nz-divider></nz-divider>
-                     
-                      <div class="row">
-                          <div class="col sm-12">
-                              <div class="text-right">
-                                  <button routerLink="/users" class="btn pull-right mr-3" nz-button nzType="danger" [nzSize]="'large'"><i nz-icon nzType="close"></i>Cancel</button>
-                                  <button type="submit" class="btn pull-right" nz-button nzType="primary" [nzSize]="'large'" (click)="addUser()" [disabled]="!userForm.valid"><i nz-icon nzType="user-add"></i>{{ mode === 'add' ? 'Add' : 'Update' }} User</button>
-                              </div>
-                          </div>
-                      </div>
+                            </nz-form-item>
+                        </div>
+
+
+                        <nz-divider nzText="Archive User"></nz-divider>
+                            <div class="row">
+                                <div class="col">
+                                    <button (click)="showDeleteConfirm()" class="btn pull-right mr-3" nz-button nzDanger nzType="dashed"
+                                    [nzSize]="'medium'"><i nz-icon nzType="delete"></i>Archive</button>
+                                </div>
+                            </div>
+
+                        <nz-divider></nz-divider>
+
+                        <div class="row">
+                            <div class="col sm-12">
+                                <div class="text-right">
+                                    <button routerLink="/users" class="btn pull-right mr-3" nz-button nzType="danger"
+                                        [nzSize]="'large'"><i nz-icon nzType="close"></i>Cancel</button>
+                                    <button type="submit" class="btn pull-right" nz-button nzType="primary"
+                                        [nzSize]="'large'" (click)="addUser()" [disabled]="!userForm.valid"><i nz-icon
+                                            nzType="user-add"></i>{{ mode === 'add' ? 'Add' : 'Update' }} User</button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
-  
-                   
-               </div>
-           </div>
-         </div>
-  
-         <div class="col-md-6">
-              <nz-divider nzText="Preview"></nz-divider>
-  
-              <div class="row">
-                <div class="col">
-                  <img [src]="imageSrc" *ngIf="imageSrc" class="profile-pic">
-                  
+
+
                 </div>
-              </div>
-         </div>
-      </div>
-  </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <nz-divider nzText="Preview"></nz-divider>
+
+            <div class="row">
+                <div class="col">
+                    <img [src]="imageSrc" *ngIf="imageSrc" class="profile-pic">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

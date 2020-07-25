@@ -38,6 +38,7 @@
     "bootstrap": "^4.5.0",
     "bootstrap-4-grid": "^3.4.0",
     "firebase": "^7.15.4",
+    "moment": "^2.27.0",
     "ng-zorro-antd": "^9.3.0",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.5.4",

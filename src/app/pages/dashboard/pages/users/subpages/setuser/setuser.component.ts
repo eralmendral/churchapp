@@ -4,8 +4,9 @@ import { Store, select } from '@ngrx/store';
 import { DashboardState } from 'src/app/pages/dashboard/reducers';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { selectUsers, selectCellgroups, selectNetworks } from 'src/app/pages/dashboard/dashboard.selectors';
-import { addUser } from 'src/app/pages/dashboard/dashboard.actions';
+import { addUser, updateUser } from 'src/app/pages/dashboard/dashboard.actions';
 import { ActivatedRoute } from '@angular/router';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-setuser',
@@ -24,7 +25,8 @@ export class SetuserComponent implements OnInit {
 
   constructor(private store: Store<DashboardState>,
     private route: ActivatedRoute,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private modal: NzModalService) {
   }
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class SetuserComponent implements OnInit {
         gender: [userDataLength ? this.userData.gender : '', Validators.required],
         phone: [userDataLength ? this.userData.phone : '', Validators.required],
         email: [userDataLength ? this.userData.email : '', [Validators.required, Validators.email]],
-        birthdate: [userDataLength ? this.userData.birthdate : ''],
+        birthdate: [],
       }),
       userProfile: this.fb.group({
         userAddress: this.fb.group({
@@ -79,7 +81,11 @@ export class SetuserComponent implements OnInit {
 
   addUser() {
     // dispatch add user 
-    this.store.dispatch(addUser(this.userForm.get('userData').value));
+    if(this.mode === 'add') {
+      this.store.dispatch(addUser(this.userForm.get('userData').value));
+    } else if(this.mode === 'edit') {
+      this.store.dispatch(updateUser(this.userForm.get('userData').value));
+    }
 
     // dispatch add profile, upload profile pic effect
 
@@ -107,6 +113,18 @@ export class SetuserComponent implements OnInit {
         resolve(null)
       })
     }
+  }
+
+  showDeleteConfirm(): void {
+    this.modal.confirm({
+      nzTitle: 'Are you sure to archive this user?',
+      nzContent: '',
+      nzOkText: 'Yes',
+      nzOkType: 'danger',
+      nzOnOk: () => console.log('OK'),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
   }
 
 }

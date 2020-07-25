@@ -11,6 +11,16 @@ export const userAdded = createAction(
     props<{user : any}>()
 )
 
+export const updateUser = createAction(
+    "[User Page] Update User",
+    props<{user : any}>()
+)
+
+export const userUpdated = createAction(
+    "[User Effect] User Updated",
+    props<{user : any}>()
+)
+
 export const addProfile = createAction(
     "[User Page] Add User Profile",
     props<{profile: any}>()

@@ -18,7 +18,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [
@@ -45,6 +45,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     NzButtonModule,
     NzDividerModule,
     NzBreadCrumbModule
-  ]
+  ],
+  providers: [NzModalService]
 })
 export class SharedComponentsModule { }
