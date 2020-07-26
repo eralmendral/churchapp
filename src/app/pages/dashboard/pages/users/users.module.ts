@@ -13,6 +13,8 @@ import { SetuserComponent } from './subpages/setuser/setuser.component';
 import { UserinfoComponent } from './subpages/userinfo/userinfo.component';
 import { UserResolver } from '../../resolvers/user.resolver';
 import { ActionButtonComponent } from './components/grid-components/action-button.component';
+import { ProfileResolver } from '../../resolvers/profile.resolver';
+import { ProfilesResolver } from '../../resolvers/profiles.resolver';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { ActionButtonComponent } from './components/grid-components/action-butto
     SharedComponentsModule,
     AgGridModule.withComponents([]),
     ],
-    providers: [ UsersResolver, UserResolver, UsersService  ],
+    providers: [ UsersResolver, UserResolver, ProfilesResolver, ProfileResolver, UsersService ],
 })
 export class UsersModule {
  }

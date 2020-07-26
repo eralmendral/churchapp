@@ -38,6 +38,12 @@ export const dashboardReducer = createReducer<DashboardState>(
       users: action.users
     }
   }),
+  on(DashboardActions.allProfilesLoaded, (state, action) => {
+    return { 
+      ...state,
+      profiles: action.profiles
+    }
+  }),
   on(DashboardActions.allNetworksLoaded, (state, action) => {
     return { 
       ...state,

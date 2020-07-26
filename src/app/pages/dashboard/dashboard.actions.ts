@@ -30,6 +30,15 @@ export const profileAdded = createAction(
     props<{profile: any}>()
 )
 
+export const updateProfile = createAction(
+    "[User Page] Update Profile",
+    props<{profile : any}>()
+)
+
+export const profileUpdated = createAction(
+    "[User Effect] Profile Updated",
+)
+
 export const removeUser = createAction(
     "[User Page] Remove User",
     props<{user : User}>()
@@ -42,6 +51,15 @@ export const loadAllUsers = createAction(
 export const allUsersLoaded = createAction(
     "[Load Users Effect] All Users Loaded",
     props<{users: any[]}>()
+)
+
+export const loadAllProfiles = createAction(
+    "[User Resolver] Load All Profiles"
+)
+
+export const allProfilesLoaded = createAction(
+    "[Load Profiles Effect] All Profiles Loaded",
+    props<{profiles: any[]}>()
 )
 
 export const loadAllNetworks = createAction(

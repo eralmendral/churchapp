@@ -22,6 +22,8 @@ import { NetworkResolver } from './resolvers/networks.resolver';
 import { CellgroupResolver } from './resolvers/cellgroups.resolver';
 import { UserinfoComponent } from './pages/users/subpages/userinfo/userinfo.component';
 import { UserResolver } from './resolvers/user.resolver';
+import { ProfileResolver } from './resolvers/profile.resolver';
+import { ProfilesResolver } from './resolvers/profiles.resolver';
 
 const routes: Routes = [
   {
@@ -30,7 +32,8 @@ const routes: Routes = [
     resolve: {
       users: UsersResolver,
       networks: NetworkResolver,
-      cellgroups: CellgroupResolver
+      cellgroups: CellgroupResolver,
+      profiles: ProfilesResolver
     },
     children: [
       { path: '', component: DashboardhomeComponent },
@@ -45,7 +48,7 @@ const routes: Routes = [
           path: 'add', component: SetuserComponent
         },
         {
-          path: 'edit/:userId', component: SetuserComponent, resolve : { userData: UserResolver }
+          path: 'edit/:userId', component: SetuserComponent, resolve : { userData: UserResolver, userProfile: ProfileResolver }
         },
         {
           path: 'view/:userId', component: UserinfoComponent

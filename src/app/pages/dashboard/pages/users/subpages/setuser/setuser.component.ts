@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { DashboardState } from 'src/app/pages/dashboard/reducers';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { selectUsers, selectCellgroups, selectNetworks } from 'src/app/pages/dashboard/dashboard.selectors';
-import { addUser, updateUser } from 'src/app/pages/dashboard/dashboard.actions';
+import { addUser, updateUser, addProfile, updateProfile } from 'src/app/pages/dashboard/dashboard.actions';
 import { ActivatedRoute } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
@@ -21,6 +21,7 @@ export class SetuserComponent implements OnInit {
   imageSrc;
   userForm;
   userData;
+  userProfile;
   mode = 'add';   // edit || add
 
   constructor(private store: Store<DashboardState>,
@@ -30,41 +31,43 @@ export class SetuserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let userDataLength;
-   
-    if(this.route.snapshot.data !== undefined) {
+    let routeData = Object.keys(this.route.snapshot.data).length;
+
+    if (routeData) {
       this.userData = this.route.snapshot.data.userData;
-      userDataLength = Object.keys(this.route.snapshot.data).length;
-      this.mode = userDataLength > 0 ? 'edit' : 'add';
-      this.imageSrc = this.userData.profile_pic;
+      this.userProfile = this.route.snapshot.data.userProfile;
+      console.log('debug user data + profile:', this.userData, this.userProfile);
     }
+
+    this.mode = routeData ? 'edit' : 'add';
+    console.log('debug route data + mode:', routeData, this.mode);
 
     let uniqueIdValidator = this.mode === 'add' ? [this.userIdExists()] : [];
 
     this.userForm = this.fb.group({
       userData: this.fb.group({
-        id: [userDataLength > 0 ? this.userData.id : '', [Validators.required], uniqueIdValidator],
-        network: [userDataLength ? this.userData.network : '', Validators.required],
-        cellgroup: [userDataLength ? this.userData.cellgroup : '', Validators.required],
-        encounterbatch: [userDataLength ? this.userData.encounterbatch : '', Validators.required],
-        level: [userDataLength ? this.userData.level : '', Validators.required],
-        firstname: [userDataLength ? this.userData.firstname : '', Validators.required],
-        lastname: [userDataLength ? this.userData.lastname : '', Validators.required],
-        gender: [userDataLength ? this.userData.gender : '', Validators.required],
-        phone: [userDataLength ? this.userData.phone : '', Validators.required],
-        email: [userDataLength ? this.userData.email : '', [Validators.required, Validators.email]],
+        id: [routeData ? this.userData.id : '', [Validators.required], uniqueIdValidator],
+        network: [routeData ? this.userData.network : '', Validators.required],
+        cellgroup: [routeData ? this.userData.cellgroup : '', Validators.required],
+        encounterbatch: [routeData ? this.userData.encounterbatch : '', Validators.required],
+        level: [routeData ? this.userData.level : '', Validators.required],
+        firstname: [routeData ? this.userData.firstname : '', Validators.required],
+        lastname: [routeData ? this.userData.lastname : '', Validators.required],
+        gender: [routeData ? this.userData.gender : '', Validators.required],
+        phone: [routeData ? this.userData.phone : '', Validators.required],
+        email: [routeData ? this.userData.email : '', [Validators.required, Validators.email]],
         birthdate: [],
-        profile_pic: [this.imageSrc]
+        profile_pic: []
       }),
       userProfile: this.fb.group({
-        userAddress: this.fb.group({
-          unit: [''],
-          street: [''],
-          barangay: [''],
-          city: [''],
+        address: this.fb.group({
+          unit: [routeData ? this.userProfile?.address.unit : ''],
+          street: [routeData ? this.userProfile?.address.street : ''],
+          barangay: [routeData ? this.userProfile?.address.city : ''],
+          city: [routeData ? this.userProfile?.address.city : ''],
         }),
-        workplace: [''],
-        campus: [''],
+        workplace: [routeData ? this.userProfile?.workplace : ''],
+        campus: [routeData ? this.userProfile?.campus : ''],
       })
     })
 
@@ -78,17 +81,20 @@ export class SetuserComponent implements OnInit {
     this.networks$ = this.store.pipe(select(selectNetworks))
   }
 
-  addUser() {
-    // dispatch add user 
-    if(this.mode === 'add') {
-      this.store.dispatch(addUser(this.userForm.get('userData').value));
-    } else if(this.mode === 'edit') {
-      this.store.dispatch(updateUser(this.userForm.get('userData').value));
+  saveUser() {
+    let profileData = {
+      ...this.userForm.get('userProfile').value,
+      userid: this.userForm.get('userData.id').value
     }
 
-    // dispatch add profile, upload profile pic effect
-
-    // upload profile pic?
+    // dispatch add user 
+    if (this.mode === 'add') {
+      this.store.dispatch(addUser(this.userForm.get('userData').value));
+      this.store.dispatch(addProfile(profileData))
+    } else if (this.mode === 'edit') {
+      this.store.dispatch(updateUser(this.userForm.get('userData').value));
+      this.store.dispatch(updateProfile(profileData))
+    }
   }
 
   readURL(event: Event): void {
@@ -98,7 +104,7 @@ export class SetuserComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = e => {
         this.imageSrc = reader.result
-        this.userForm.patchValue({  userData: { profile_pic: reader.result }})
+        // this.userForm.patchValue({  userData: { profile_pic: reader.result }})
       };
       reader.readAsDataURL(file);
     }

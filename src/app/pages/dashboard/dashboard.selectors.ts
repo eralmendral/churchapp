@@ -13,11 +13,15 @@ export const selectUserById =  (id: string) => createSelector(
     users => users.find(user => user.id === id)
 );
 
-
-export const profiles = createSelector(
+export const selectProfiles = createSelector(
     selectDashboardState,
     dashboard => dashboard.profiles
 )
+
+export const selectProfileById = (id: string) => createSelector(
+    selectProfiles,
+    profiles => profiles.find(profile => profile.userid === id)
+);
 
 export const selectNetworks = createSelector(
     selectDashboardState,

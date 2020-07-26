@@ -32,8 +32,9 @@
                 <div class="col-12">
                     <form nz-form [formGroup]="userForm">
                         <div formGroupName="userData">
-                            <nz-form-item *ngshow="mode === 'add'">
+                            <nz-form-item>
                                 <nz-form-control
+                                [hidden]="mode !== 'add'"
                                     [nzErrorTip]="userForm.get('userData.id').hasError('required') ? 'Field required' :  userForm.get('userData.id').hasError('idtaken') ? 'ID already taken.' : ''">
                                     <nz-input-group nzPrefixIcon="idcard">
                                         <input type="text" nz-input formControlName="id" placeholder="ID" />
@@ -143,7 +144,7 @@
 
                         <div formGroupName="userProfile">
                             <nz-divider nzText="Address"></nz-divider>
-                            <div formGroupName="userAddress">
+                            <div formGroupName="address">
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <nz-form-item>
@@ -214,12 +215,12 @@
 
 
                         <nz-divider nzText="Archive User"></nz-divider>
-                            <div class="row">
-                                <div class="col">
-                                    <button (click)="showDeleteConfirm()" class="btn pull-right mr-3" nz-button nzDanger nzType="dashed"
-                                    [nzSize]="'medium'"><i nz-icon nzType="delete"></i>Archive</button>
-                                </div>
+                        <div class="row">
+                            <div class="col">
+                                <button (click)="showDeleteConfirm()" class="btn pull-right mr-3" nz-button nzDanger
+                                    nzType="dashed" [nzSize]="'medium'"><i nz-icon nzType="delete"></i>Archive</button>
                             </div>
+                        </div>
 
                         <nz-divider></nz-divider>
 
@@ -229,7 +230,7 @@
                                     <button routerLink="/users" class="btn pull-right mr-3" nz-button nzType="danger"
                                         [nzSize]="'large'"><i nz-icon nzType="close"></i>Cancel</button>
                                     <button type="submit" class="btn pull-right" nz-button nzType="primary"
-                                        [nzSize]="'large'" (click)="addUser()" [disabled]="!userForm.valid"><i nz-icon
+                                        [nzSize]="'large'" (click)="saveUser()" [disabled]="!userForm.valid"><i nz-icon
                                             nzType="user-add"></i>{{ mode === 'add' ? 'Add' : 'Update' }} User</button>
                                 </div>
                             </div>
