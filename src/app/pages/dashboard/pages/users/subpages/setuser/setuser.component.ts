@@ -38,10 +38,7 @@ export class SetuserComponent implements OnInit {
       this.mode = userDataLength > 0 ? 'edit' : 'add';
     }
 
-    
     let uniqueIdValidator = this.mode === 'add' ? [this.userIdExists()] : [];
-
-    console.log('this.mode', this.mode, uniqueIdValidator)
 
     this.userForm = this.fb.group({
       userData: this.fb.group({
@@ -88,7 +85,6 @@ export class SetuserComponent implements OnInit {
     }
 
     // dispatch add profile, upload profile pic effect
-
 
     // upload profile pic?
   }

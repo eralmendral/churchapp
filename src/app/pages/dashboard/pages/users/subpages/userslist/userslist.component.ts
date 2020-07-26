@@ -27,14 +27,15 @@ export class UserslistComponent implements OnInit, OnDestroy {
   constructor (private store: Store<DashboardState>)
   {
     this.columnDefs = [
-        { headerName: 'Action', field: 'action', width: 400, filter: false, cellRenderer: 'actionButtonRenderer' },
+        { headerName: 'Action', field: 'action', width: 200, filter: false, cellRenderer: 'actionButtonRenderer' },
         { headerName: 'Image', field: 'profile_pic', cellRenderer: 'profilePicRenderer', filter: false, },
-        { headerName: 'ID', field: 'id', filter: 'agTextColumnFilter', sortable: true },
+        { headerName: 'ID', field: 'id', filter: 'agTextColumnFilter', sortable: true, width: 150 },
         { headerName: 'Firstname', field: 'firstname', filter: 'agTextColumnFilter', sortable: true },
         { headerName: 'Lastname', field: 'lastname', filter: 'agTextColumnFilter', sortable: true },
         { headerName: 'Network', field: 'network', filter: 'agTextColumnFilter', sortable: true },
         { headerName: 'Phone', field: 'phone', filter: 'agTextColumnFilter', sortable: true },
-        { headerName: 'Email', field: 'email', filter: 'agTextColumnFilter', sortable: true }
+        { headerName: 'Email', field: 'email', filter: 'agTextColumnFilter', sortable: true },
+        { headerName: 'Gender', field: 'gender', filter: 'agTextColumnFilter', width: 150 }
       ];
 
     this.frameworkComponents = {

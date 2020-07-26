@@ -55,7 +55,7 @@ import { CellgroupModule } from './pages/cellgroup/cellgroup.module';
     RouterModule,
     NetworksModule,
     UsersModule,
-    CellgroupModule,
+    CellgroupModule,  
     DashboardRoutingModule,
     SharedComponentsModule,
     IconsProviderModule,

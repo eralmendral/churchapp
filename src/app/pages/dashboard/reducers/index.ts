@@ -59,8 +59,6 @@ export const dashboardReducer = createReducer<DashboardState>(
     }
   }),
 
-
-
 )
 
 export function logger(reducer: ActionReducer<any>) : ActionReducer<any> {

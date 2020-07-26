@@ -12,6 +12,7 @@ import { UsersResolver } from '../../resolvers/users.resolver';
 import { SetuserComponent } from './subpages/setuser/setuser.component';
 import { UserinfoComponent } from './subpages/userinfo/userinfo.component';
 import { UserResolver } from '../../resolvers/user.resolver';
+import { ActionButtonComponent } from './components/grid-components/action-button.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { UserResolver } from '../../resolvers/user.resolver';
     UserslistComponent,
     SetuserComponent,
     UserinfoComponent,
+    ActionButtonComponent
   ],
   imports: [
     CommonModule,

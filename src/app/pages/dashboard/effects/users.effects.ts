@@ -4,7 +4,7 @@ import { DashboardActions } from '../dashboard.actiontypes';
 import { createEffect, ofType, Actions, } from '@ngrx/effects';
 import { concatMap, map, tap, switchMap } from 'rxjs/operators';
 import { UsersService } from '../services/users.service';
-import { allUsersLoaded, userAdded } from '../dashboard.actions';
+import { allUsersLoaded, userAdded, userUpdated } from '../dashboard.actions';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,7 +14,7 @@ export class UsersEffects {
 
     loadUsers$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(DashboardActions.loadAllUsers),
+            ofType(DashboardActions.loadAllUsers, DashboardActions.userUpdated),
             concatMap(action => this.userService.fetchusers()),
             map(users => allUsersLoaded({ users }))
         )
@@ -23,18 +23,21 @@ export class UsersEffects {
     updateUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(DashboardActions.updateUser),
-            concatMap(action => this.userService.fetchusers()),
-            map(users => {
-                this.toastr.success('User Updated!');
-                return allUsersLoaded({ users })
-            })
-        )
+            concatMap((user: any) => {
+                return this.afs.collection('users').doc(user.id).set(user).then(() => {
+                    this.router.navigate(['users']);
+                    this.toastr.success('User Updated!');
+                    return userUpdated()
+                })
+            }),
+        ),
     )
 
     addUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(DashboardActions.addUser),
             concatMap((user: any) => {
+                console.log('debug user')
                 return this.afs.collection('users').doc(user.id).set(user).then(() => {
                     this.router.navigate(['users']);
                     this.toastr.success('User Added!');
