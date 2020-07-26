@@ -7,6 +7,7 @@ import { UsersService } from '../services/users.service';
 import { allUsersLoaded, userAdded, userUpdated } from '../dashboard.actions';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Injectable()
 export class UsersEffects {
@@ -24,6 +25,8 @@ export class UsersEffects {
         this.actions$.pipe(
             ofType(DashboardActions.updateUser),
             concatMap((user: any) => {
+                // todo: extract profile_pic and use firebase storage to store image file
+                // note: currently profile_pic is stored as data_url
                 return this.afs.collection('users').doc(user.id).set(user).then(() => {
                     this.router.navigate(['users']);
                     this.toastr.success('User Updated!');
@@ -32,6 +35,13 @@ export class UsersEffects {
             }),
         ),
     )
+
+    uploadImage(event, userId) {
+        const file: File = event.target.files[0];
+        const filepath = `user_images/${userId}/${file.name}`;
+        const task = this.storage.upload(filepath, file);
+        task.snapshotChanges().subscribe(console.log);
+    }
 
     addUser$ = createEffect(() =>
         this.actions$.pipe(
@@ -49,6 +59,7 @@ export class UsersEffects {
 
     constructor(private actions$: Actions, private userService: UsersService,
         private afs: AngularFirestore,
+        private storage: AngularFireStorage,
         private router: Router,
         private toastr: ToastrService) { }
 }

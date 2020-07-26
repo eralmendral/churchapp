@@ -36,6 +36,7 @@ export class SetuserComponent implements OnInit {
       this.userData = this.route.snapshot.data.userData;
       userDataLength = Object.keys(this.route.snapshot.data).length;
       this.mode = userDataLength > 0 ? 'edit' : 'add';
+      this.imageSrc = this.userData.profile_pic;
     }
 
     let uniqueIdValidator = this.mode === 'add' ? [this.userIdExists()] : [];
@@ -53,6 +54,7 @@ export class SetuserComponent implements OnInit {
         phone: [userDataLength ? this.userData.phone : '', Validators.required],
         email: [userDataLength ? this.userData.email : '', [Validators.required, Validators.email]],
         birthdate: [],
+        profile_pic: [this.imageSrc]
       }),
       userProfile: this.fb.group({
         userAddress: this.fb.group({
@@ -94,7 +96,10 @@ export class SetuserComponent implements OnInit {
     if (eventFile.files && eventFile.files[0]) {
       const file = eventFile.files[0];
       const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
+      reader.onload = e => {
+        this.imageSrc = reader.result
+        this.userForm.patchValue({  userData: { profile_pic: reader.result }})
+      };
       reader.readAsDataURL(file);
     }
   }
