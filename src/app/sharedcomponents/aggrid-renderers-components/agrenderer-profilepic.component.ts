@@ -5,7 +5,7 @@ import { ICellRendererAngularComp } from 'ag-grid-community/dist/ag-grid-communi
   selector: 'app-profile-pic',
   template: "<img src='{{ profileImage() }}' class='profile-avatar' />",
 })
-export class ProfilePicComponent implements ICellRendererAngularComp {
+export class ProfilePicRendererComponent implements ICellRendererAngularComp {
 
   private params: any;
 

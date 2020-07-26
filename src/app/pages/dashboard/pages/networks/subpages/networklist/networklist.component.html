@@ -37,6 +37,8 @@
                 pageSize="10"
                 paginationAutoPageSize="false"
                 [frameworkComponents]="frameworkComponents"
+                [rowHeight]="120"
+                (firstDataRendered)="onFirstDataRendered($event)"
             >
             </ag-grid-angular>
         </div> 

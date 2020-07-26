@@ -4,8 +4,8 @@ import { Router,  ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-action-button',
-  template: '<button class="btn btn-outline" (click)="viewNetwork()">View</button>' +
-            `<button class="btn btn-success-outline" (click)="editNetwork()">Edit</button>`
+  template: `<button type="submit" class="btn pull-right mx-1" nz-button nzType="danger" (click)="viewNetwork()" [nzSize]="'medium'"><i nz-icon nzType="eye"></i>View</button>` + 
+            `<button type="submit" class="btn pull-right mx-1" nz-button nzType="primary" (click)="editNetwork()" [nzSize]="'medium'"><i nz-icon nzType="edit"></i>Edit</button>`
 })
 export class ActionButtonComponent implements ICellRendererAngularComp
 {

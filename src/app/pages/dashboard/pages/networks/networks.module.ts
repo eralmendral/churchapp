@@ -9,13 +9,14 @@ import { NetworkService } from '../../services/network.service';
 import { NetworkResolver } from '../../resolvers/networks.resolver';
 import { SharedComponentsModule } from 'src/app/sharedcomponents/sharedcomponents.module';
 import { SetnetworkComponent } from './subpages/setnetwork/setnetwork.component';
-
+import { ActionButtonComponent } from './components/grid-components/action-button.component';
 
 @NgModule({
   declarations: [
     NetworklistComponent,
     ViewnetworkComponent,
     SetnetworkComponent,
+    ActionButtonComponent,
   ],
   imports: [
     CommonModule,

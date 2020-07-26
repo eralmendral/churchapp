@@ -4,10 +4,10 @@ import { Router,  ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 @Component({
-  selector: 'app-action-button',
+  selector: 'app-cellleader-renderer',
   template: '<p>{{ name }}</p>'
 })
-export class CellLeaderComponent implements ICellRendererAngularComp
+export class CellLeaderRendererComponent implements ICellRendererAngularComp
 {
 
   private params: any;

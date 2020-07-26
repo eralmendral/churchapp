@@ -28,6 +28,11 @@ export const selectNetworks = createSelector(
     dashboard => dashboard.networks
 )
 
+export const selectNetworkById =  (id: string) => createSelector(
+    selectNetworks,
+    networks => networks.find(network => network.id === id)
+);
+
 export const selectCellgroups = createSelector(
     selectDashboardState,
     dashboard => dashboard.cellgroups

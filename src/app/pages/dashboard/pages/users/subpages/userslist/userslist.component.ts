@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { ProfilePicComponent } from '../../components/grid-components/profile-pic.component';
-import { ActionButtonComponent } from '../../components/grid-components/action-button.component';
 import { Store, select } from '@ngrx/store';
 import { DashboardState } from 'src/app/pages/dashboard/reducers';
 import { selectUsers } from 'src/app/pages/dashboard/dashboard.selectors';
 
+import { GenderRendererComponent } from 'src/app/sharedcomponents/aggrid-renderers-components/agrenderer-gender.component';
+import { ProfilePicRendererComponent } from '../../../../../../sharedcomponents/aggrid-renderers-components/agrenderer-profilepic.component';
+import { ActionButtonComponent } from '../../components/grid-components/action-button.component';
+import { NetworkLeaderRendererComponent } from 'src/app/sharedcomponents/aggrid-renderers-components/agrenderer-networkleader.component';
 @Component({
   selector: 'app-userslist',
   templateUrl: './userslist.component.html',
@@ -24,23 +25,24 @@ export class UserslistComponent implements OnInit, OnDestroy {
   public defaultColDef;
   public getRowHeight;
 
-  constructor (private store: Store<DashboardState>)
-  {
+  constructor(private store: Store<DashboardState>) {
     this.columnDefs = [
-        { headerName: 'Action', field: 'action', width: 200, filter: false, cellRenderer: 'actionButtonRenderer' },
-        { headerName: 'Image', field: 'profile_pic', cellRenderer: 'profilePicRenderer', filter: false, },
-        { headerName: 'ID', field: 'id', filter: 'agTextColumnFilter', sortable: true, width: 150 },
-        { headerName: 'Firstname', field: 'firstname', filter: 'agTextColumnFilter', sortable: true },
-        { headerName: 'Lastname', field: 'lastname', filter: 'agTextColumnFilter', sortable: true },
-        { headerName: 'Network', field: 'network', filter: 'agTextColumnFilter', sortable: true },
-        { headerName: 'Phone', field: 'phone', filter: 'agTextColumnFilter', sortable: true },
-        { headerName: 'Email', field: 'email', filter: 'agTextColumnFilter', sortable: true },
-        { headerName: 'Gender', field: 'gender', filter: 'agTextColumnFilter', width: 150 }
-      ];
+      { headerName: 'Action', field: 'action', width: 200, filter: false, cellRenderer: 'actionButtonRenderer', suppressSizeToFit: true }, 
+      { headerName: 'Image', field: 'profile_pic', cellRenderer: 'profilePicRenderer', filter: false, },
+      { headerName: 'ID', field: 'id', filter: 'agTextColumnFilter', sortable: true, width: 150 },
+      { headerName: 'Firstname', field: 'firstname', filter: 'agTextColumnFilter', sortable: true, suppressSizeToFit: true,}, 
+      { headerName: 'Lastname', field: 'lastname', filter: 'agTextColumnFilter', sortable: true, suppressSizeToFit: true,}, 
+      { headerName: 'Network', field: 'network', filter: 'agTextColumnFilter', sortable: true , cellRenderer: 'networkLeaderRenderer'},
+      { headerName: 'Phone', field: 'phone', filter: 'agTextColumnFilter', sortable: true },
+      { headerName: 'Email', field: 'email', filter: 'agTextColumnFilter', sortable: true },
+      { headerName: 'Gender', field: 'gender', filter: 'agTextColumnFilter', width: 150 , cellRenderer: 'userGenderRenderer'}
+    ];
 
     this.frameworkComponents = {
-      profilePicRenderer: ProfilePicComponent,
-      actionButtonRenderer: ActionButtonComponent
+      profilePicRenderer: ProfilePicRendererComponent,
+      actionButtonRenderer: ActionButtonComponent,
+      userGenderRenderer: GenderRendererComponent,
+      networkLeaderRenderer: NetworkLeaderRendererComponent
     }
 
     this.defaultColDef = {
@@ -54,14 +56,19 @@ export class UserslistComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchUsers();
-   }
+  }
 
-   fetchUsers() {
-      this.users$ = this.store.pipe(select(selectUsers));
-   }
+  fetchUsers() {
+    this.users$ = this.store.pipe(select(selectUsers));
+  }
+
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
+  }
+
 
   ngOnDestroy(): void {
-    
-   }
+
+  }
 
 }
