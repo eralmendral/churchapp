@@ -14,8 +14,6 @@ import { UsersComponent, } from './pages/users/users.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NetworklistComponent } from './pages/networks/subpages/networklist/networklist.component';
-import { AddnetworkComponent } from './pages/networks/subpages/addnetwork/addnetwork.component';
-import { EditnetworkComponent } from './pages/networks/subpages/editnetwork/editnetwork.component';
 import { ViewnetworkComponent } from './pages/networks/subpages/viewnetwork/viewnetwork.component';
 import { UsersResolver } from './resolvers/users.resolver';
 import { NetworkResolver } from './resolvers/networks.resolver';
@@ -24,6 +22,7 @@ import { UserinfoComponent } from './pages/users/subpages/userinfo/userinfo.comp
 import { UserResolver } from './resolvers/user.resolver';
 import { ProfileResolver } from './resolvers/profile.resolver';
 import { ProfilesResolver } from './resolvers/profiles.resolver';
+import { SetnetworkComponent } from './pages/networks/subpages/setnetwork/setnetwork.component';
 
 const routes: Routes = [
   {
@@ -61,10 +60,10 @@ const routes: Routes = [
             path: '', component: NetworklistComponent
           },
           {
-            path: 'add', component: AddnetworkComponent
+            path: 'add', component: SetnetworkComponent
           },
           {
-            path: 'edit/:networkid', component: EditnetworkComponent
+            path: 'edit/:networkid', component: SetnetworkComponent
           },
           {
             path: 'view/:networkid', component: ViewnetworkComponent
