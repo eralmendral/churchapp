@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   login() {
     this.auth.login(this.loginForm.value.email, this.loginForm.value.password).then((data: any) => {
       if(data){
-        console.log(data);
         this.store.dispatch(AuthActions.login({user : { email: this.loginForm.value.email }}))
         this.error = '';
         this.router.navigate(['dashboard'])

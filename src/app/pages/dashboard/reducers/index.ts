@@ -56,15 +56,6 @@ export const dashboardReducer = createReducer<DashboardState>(
       cellgroups: action.cellgroups
     }
   }),
-
-  // add user
-  on(DashboardActions.userAdded,( state, action) => {
-    return {
-      ...state,
-      users: [action.user, ...state.users]
-    }
-  }),
-
 )
 
 export function logger(reducer: ActionReducer<any>) : ActionReducer<any> {

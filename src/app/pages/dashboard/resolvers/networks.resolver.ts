@@ -7,7 +7,7 @@ import { tap, first, finalize } from 'rxjs/operators';
 import {  loadAllNetworks } from '../dashboard.actions';
 
 @Injectable()
-export class NetworkResolver implements Resolve<any> {
+export class NetworksResolver implements Resolve<any> {
     loading = false;
     constructor(private store: Store<AppState>) {}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {

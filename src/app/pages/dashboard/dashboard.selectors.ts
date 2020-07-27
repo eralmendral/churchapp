@@ -8,10 +8,18 @@ export const selectUsers = createSelector(
     dashboard => dashboard.users
 )
 
-export const selectUserById =  (id: string) => createSelector(
+export const selectUserById = (id: string) => createSelector(
     selectUsers,
     users => users.find(user => user.id === id)
 );
+
+export const selectPrimaries = createSelector(selectUsers,
+    users => users.filter(user => {
+        if (user.hasOwnProperty('level')) {
+            return user.level === '12'
+        }
+    })
+)
 
 export const selectProfiles = createSelector(
     selectDashboardState,
@@ -28,7 +36,7 @@ export const selectNetworks = createSelector(
     dashboard => dashboard.networks
 )
 
-export const selectNetworkById =  (id: string) => createSelector(
+export const selectNetworkById = (id: string) => createSelector(
     selectNetworks,
     networks => networks.find(network => network.id === id)
 );

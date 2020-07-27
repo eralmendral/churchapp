@@ -16,13 +16,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { NetworklistComponent } from './pages/networks/subpages/networklist/networklist.component';
 import { ViewnetworkComponent } from './pages/networks/subpages/viewnetwork/viewnetwork.component';
 import { UsersResolver } from './resolvers/users.resolver';
-import { NetworkResolver } from './resolvers/networks.resolver';
+import { NetworksResolver } from './resolvers/networks.resolver';
 import { CellgroupResolver } from './resolvers/cellgroups.resolver';
 import { UserinfoComponent } from './pages/users/subpages/userinfo/userinfo.component';
 import { UserResolver } from './resolvers/user.resolver';
 import { ProfileResolver } from './resolvers/profile.resolver';
 import { ProfilesResolver } from './resolvers/profiles.resolver';
 import { SetnetworkComponent } from './pages/networks/subpages/setnetwork/setnetwork.component';
+import { NetworkResolver } from './resolvers/network.resolver';
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
     component: DashboardComponent,
     resolve: {
       users: UsersResolver,
-      networks: NetworkResolver,
+      networks: NetworksResolver,
       cellgroups: CellgroupResolver,
       profiles: ProfilesResolver
     },
@@ -63,10 +64,10 @@ const routes: Routes = [
             path: 'add', component: SetnetworkComponent
           },
           {
-            path: 'edit/:networkid', component: SetnetworkComponent
+            path: 'edit/:networkId', component: SetnetworkComponent, resolve : { networkData: NetworkResolver }
           },
           {
-            path: 'view/:networkid', component: ViewnetworkComponent
+            path: 'view/:networkId', component: ViewnetworkComponent
           }
         ] 
       },

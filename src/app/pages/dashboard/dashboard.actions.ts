@@ -8,7 +8,6 @@ export const addUser = createAction(
 
 export const userAdded = createAction(
     "[User Effect] User Added",
-    props<{user : any}>()
 )
 
 export const updateUser = createAction(
@@ -62,6 +61,9 @@ export const allProfilesLoaded = createAction(
     props<{profiles: any[]}>()
 )
 
+
+// Networks
+
 export const loadAllNetworks = createAction(
     "[Network Resolver] Load All Networks",
 )
@@ -70,6 +72,29 @@ export const allNetworksLoaded = createAction(
     "[Load Networks Effect] All Networks Loaded",
     props<{networks: any[]}>()
 )
+
+export const addNetwork = createAction(
+    "[Network Page] Add Network",
+    props<{network : any}>()
+)
+
+export const networkAdded = createAction(
+    "[Network Effect] Network Added",
+    props<{network : any}>()
+)
+
+
+export const updateNetwork = createAction(
+    "[Network Page] Update Network",
+    props<{network : any}>()
+)
+
+export const networkUpdated = createAction(
+    "[Network Effects] Network Updated",
+)
+
+// End Networks
+
 
 export const loadAllCellgroups = createAction(
     "[Cellgroup Resolver] Load All Cellgroups",

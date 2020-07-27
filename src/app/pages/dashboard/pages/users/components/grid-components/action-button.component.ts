@@ -23,9 +23,6 @@ export class ActionButtonComponent implements ICellRendererAngularComp
     return false;
   }
 
-  test(){
-    console.log(this.params.data);
-  }
   viewUser(){
     this.router.navigate(['view', this.params.data.id], { relativeTo: this.route})
   }

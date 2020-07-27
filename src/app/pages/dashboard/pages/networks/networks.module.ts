@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NetworklistComponent } from './subpages/networklist/networklist.component';
-import { ViewnetworkComponent } from './subpages/viewnetwork/viewnetwork.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AgGridModule } from 'ag-grid-angular';
-import { NetworkService } from '../../services/network.service';
-import { NetworkResolver } from '../../resolvers/networks.resolver';
 import { SharedComponentsModule } from 'src/app/sharedcomponents/sharedcomponents.module';
+
+// Services
+import { NetworkService } from '../../services/network.service';
+import { NetworksResolver } from '../../resolvers/networks.resolver';
+import { NetworkResolver } from '../../resolvers/network.resolver';
+
+// Components
+import { NetworklistComponent } from './subpages/networklist/networklist.component';
+import { ViewnetworkComponent } from './subpages/viewnetwork/viewnetwork.component';
 import { SetnetworkComponent } from './subpages/setnetwork/setnetwork.component';
 import { ActionButtonComponent } from './components/grid-components/action-button.component';
 
@@ -28,7 +33,8 @@ import { ActionButtonComponent } from './components/grid-components/action-butto
   ],
   providers: [
     NetworkService,
-    NetworkResolver
+    NetworksResolver,
+    NetworkResolver,
   ]
 })
 export class NetworksModule { }

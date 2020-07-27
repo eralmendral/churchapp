@@ -36,7 +36,7 @@ export class UsersEffects {
                 return this.afs.collection('users').doc(user.id).set(user).then(() => {
                     this.router.navigate(['users']);
                     this.toastr.success('User Added!');
-                    return userAdded({ user: user })
+                    return userAdded()
                 })
             })
         )

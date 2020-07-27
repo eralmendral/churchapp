@@ -36,11 +36,10 @@ export class SetuserComponent implements OnInit {
     if (routeData) {
       this.userData = this.route.snapshot.data.userData;
       this.userProfile = this.route.snapshot.data.userProfile;
-      console.log('debug user data + profile:', this.userData, this.userProfile);
+      
     }
 
     this.mode = routeData ? 'edit' : 'add';
-    console.log('debug route data + mode:', routeData, this.mode);
 
     let uniqueIdValidator = this.mode === 'add' ? [this.userIdExists()] : [];
 

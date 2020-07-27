@@ -11,7 +11,7 @@ export class UserResolver implements Resolve<any> {
     constructor(private store: Store<DashboardState>, private router: Router) {}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         return this.store.pipe(
-            select(userData => userData['dashboard'].users.find(users => users.id === route.paramMap.get('userId'))),
+            select(userData => userData['dashboard'].users.find(user => user.id === route.paramMap.get('userId'))),
             first(),
             tap(userData => {
                 if(!userData) {

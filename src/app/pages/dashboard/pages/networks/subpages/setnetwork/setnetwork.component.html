@@ -1,1 +1,84 @@
-<p>setnetwork works!</p>
+<div class="container-fluid">
+      <!-- todo: make this as shared component -->
+      <div class="row">
+        <div class="col-sm-12">
+            <nz-breadcrumb>
+                <nz-breadcrumb-item>
+                    <a routerLink='/dashboard'>Dashboard</a>
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                    <a routerLink='/dashboard/networks'>Networks</a>
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                    {{mode === 'add' ? 'Add Network' : 'Edit Network'}}
+                </nz-breadcrumb-item>
+            </nz-breadcrumb>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>{{mode === 'add' ? 'Add' : 'Edit'}} Network</h1>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <form nz-form [formGroup]="networkForm">
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Encounter Batch Number">
+                            <nz-select nzPrefixIcon="lock" nzAllowClear nzPlaceHolder="Select a Gender"
+                                formControlName="gender">
+                                <nz-option nzLabel="Male" nzValue="male"></nz-option>
+                                <nz-option nzLabel="Female" nzValue="female"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-select formControlName="leader" nzPrefixIcon="lock" nzShowSearch nzAllowClear
+                            nzPlaceHolder="Select a Network Leader">
+                            <nz-option *ngFor="let primary of (primaries$ | async)" [nzLabel]="primary.firstname + '  ' + primary.lastname"
+                                [nzValue]="primary.id"></nz-option>
+                        </nz-select>
+                    </nz-form-item>
+
+
+                    <nz-form-item>
+                        <nz-form-control nzErrorTip="Add a Network Name">
+                            <nz-input-group nzPrefixIcon="user">
+                                <input type="text" nz-input formControlName="name"
+                                    placeholder="Network Name" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                <!-- <nz-divider nzText="Archive Network"></nz-divider>
+              
+                <div class="row">
+                    <div class="col">
+                        <button (click)="showDeleteConfirm()" class="btn pull-right mr-3" nz-button nzDanger
+                            nzType="dashed" [nzSize]="'medium'"><i nz-icon nzType="delete"></i>Archive</button>
+                    </div>
+                </div> -->
+
+                <nz-divider></nz-divider> 
+
+               <div class="row">
+                    <div class="col sm-12">
+                        <div class="text-right">
+                            <button routerLink="/dashboard/networks" class="btn pull-right mr-3" nz-button nzType="danger"
+                                [nzSize]="'large'"><i nz-icon nzType="close"></i>Cancel</button>
+                            <button type="submit" class="btn pull-right" nz-button nzType="primary"
+                                [nzSize]="'large'" (click)="saveNetwork()" [disabled]="!networkForm.valid"><i nz-icon
+                                    nzType="user-add"></i>{{ mode === 'add' ? 'Add' : 'Update' }} Network</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
