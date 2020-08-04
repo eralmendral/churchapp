@@ -40,7 +40,11 @@ export const profileUpdated = createAction(
 
 export const removeUser = createAction(
     "[User Page] Remove User",
-    props<{user : User}>()
+    props<{userId : string}>()
+)
+
+export const userRemoved = createAction(
+    "[User Effect] User Removed",
 )
 
 export const loadAllUsers = createAction(
@@ -94,7 +98,6 @@ export const networkUpdated = createAction(
 )
 
 // End Networks
-
 
 export const loadAllCellgroups = createAction(
     "[Cellgroup Resolver] Load All Cellgroups",

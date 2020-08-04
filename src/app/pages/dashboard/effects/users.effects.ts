@@ -2,9 +2,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
 import { DashboardActions } from '../dashboard.actiontypes';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { concatMap, map, tap, switchMap } from 'rxjs/operators';
+import { concatMap, map, tap, switchMap, concat } from 'rxjs/operators';
 import { UsersService } from '../services/users.service';
-import { allUsersLoaded, allProfilesLoaded, userAdded, userUpdated, profileAdded, profileUpdated } from '../dashboard.actions';
+import { allUsersLoaded, allProfilesLoaded, userAdded, userUpdated, profileAdded, profileUpdated, userRemoved } from '../dashboard.actions';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFireStorage } from 'angularfire2/storage';
@@ -14,7 +14,7 @@ export class UsersEffects {
 
     loadUsers$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(DashboardActions.loadAllUsers, DashboardActions.userUpdated),
+            ofType(DashboardActions.loadAllUsers, DashboardActions.userUpdated, DashboardActions.userRemoved),
             concatMap(action => this.userService.fetchusers()),
             map(users => allUsersLoaded({ users }))
         )
@@ -32,8 +32,9 @@ export class UsersEffects {
     addUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(DashboardActions.addUser),
-            concatMap((user: any) => {
-                return this.afs.collection('users').doc(user.id).set(user).then(() => {
+            concatMap((action: any) => {
+                let user = { ...action.user, isDeleted: false }
+                return this.afs.collection('users').doc(action.user.id).set(user).then(() => {
                     this.router.navigate(['users']);
                     this.toastr.success('User Added!');
                     return userAdded()
@@ -45,10 +46,11 @@ export class UsersEffects {
     updateUser$ = createEffect(() =>
         this.actions$.pipe(
             ofType(DashboardActions.updateUser),
-            concatMap((user: any) => {
+            concatMap((action: any) => {
                 // todo: extract profile_pic and use firebase storage to store image file
                 // note: currently profile_pic is stored as data_url
-                return this.afs.collection('users').doc(user.id).set(user).then(() => {
+                let user = { ...action.user, isDeleted: false }
+                return this.afs.collection('users').doc(action.user.id).set(user).then(() => {
                     this.toastr.success('User Updated!');
                     return userUpdated()
                 })
@@ -59,9 +61,9 @@ export class UsersEffects {
     addProfile$ = createEffect(() =>
         this.actions$.pipe(
             ofType(DashboardActions.addProfile),
-            concatMap((profile: any) => {
-                return this.afs.collection('profiles').doc(profile.userid).set(profile).then(() => {
-                    return profileAdded({ profile: profile })
+            concatMap((action: any) => {
+                return this.afs.collection('profiles').doc(action.profile.userid).set(action.profile).then(() => {
+                    return profileAdded({ profile: action.profile })
                 })
             })
         ))
@@ -69,13 +71,25 @@ export class UsersEffects {
     updateProfile$ = createEffect(() =>
         this.actions$.pipe(
             ofType(DashboardActions.updateProfile),
-            concatMap((profile: any) => {
-                return this.afs.collection('profiles').doc(profile.userid).set(profile).then(() => {
+            concatMap((action: any) => {
+                return this.afs.collection('profiles').doc(action.profile.userid).set(action.profile).then(() => {
                     return profileUpdated();
                 })
             })
         )
     )
+
+    removeUser$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(DashboardActions.removeUser),
+        concatMap((action: any) => {
+            return this.afs.collection('users').doc(action.userId).set({isDeleted: true}, { merge: true }).then(() => {
+                this.toastr.success('User removed!');
+                this.router.navigate(['dashboard','users'])
+                return userRemoved();
+            })
+        })
+    ))
 
     constructor(private actions$: Actions, private userService: UsersService,
         private afs: AngularFirestore,

@@ -14,7 +14,7 @@ export class UsersService {
     }
 
     fetchusers(){
-        this.usersCollection = this.afs.collection<User>('users');
+        this.usersCollection = this.afs.collection<User>('users', ref => ref.where('isDeleted', '==', false));
         this.users = this.usersCollection.valueChanges();
         return  this.users;
     }
@@ -25,7 +25,9 @@ export class UsersService {
         return this.profiles;
     }
 
-    addUser(userData, userProfile){
+    setUser(userData, userProfile){
         this.afs.collection<User>('users').doc(userData.id).set(userData);
     }
+
+
 }

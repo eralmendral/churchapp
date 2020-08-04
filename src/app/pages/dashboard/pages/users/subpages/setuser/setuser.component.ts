@@ -1,3 +1,4 @@
+import { removeUser } from './../../../../dashboard.actions';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Store, select } from '@ngrx/store';
@@ -36,7 +37,6 @@ export class SetuserComponent implements OnInit {
     if (routeData) {
       this.userData = this.route.snapshot.data.userData;
       this.userProfile = this.route.snapshot.data.userProfile;
-      
     }
 
     this.mode = routeData ? 'edit' : 'add';
@@ -88,11 +88,11 @@ export class SetuserComponent implements OnInit {
 
     // dispatch add user 
     if (this.mode === 'add') {
-      this.store.dispatch(addUser(this.userForm.get('userData').value));
-      this.store.dispatch(addProfile(profileData))
+      this.store.dispatch(addUser({ user: this.userForm.get('userData').value}));
+      this.store.dispatch(addProfile({profile: profileData}))
     } else if (this.mode === 'edit') {
-      this.store.dispatch(updateUser(this.userForm.get('userData').value));
-      this.store.dispatch(updateProfile(profileData))
+      this.store.dispatch(updateUser({user: this.userForm.get('userData').value}));
+      this.store.dispatch(updateProfile({profile: profileData}))
     }
   }
 
@@ -121,13 +121,15 @@ export class SetuserComponent implements OnInit {
     }
   }
 
-  showDeleteConfirm(): void {
+  showDeleteConfirm(userId): void {
     this.modal.confirm({
       nzTitle: 'Are you sure to archive this user?',
       nzContent: '',
       nzOkText: 'Yes',
       nzOkType: 'danger',
-      nzOnOk: () => console.log('OK'),
+      nzOnOk: () => {
+        this.store.dispatch(removeUser({ userId : userId}))
+      },
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
     });
