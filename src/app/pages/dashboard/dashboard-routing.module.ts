@@ -24,6 +24,9 @@ import { ProfileResolver } from './resolvers/profile.resolver';
 import { ProfilesResolver } from './resolvers/profiles.resolver';
 import { SetnetworkComponent } from './pages/networks/subpages/setnetwork/setnetwork.component';
 import { NetworkResolver } from './resolvers/network.resolver';
+import { CellgroupinfoComponent } from './pages/cellgroup/subpages/cellgroupinfo/cellgroupinfo.component';
+import { CellgrouplistComponent } from './pages/cellgroup/subpages/cellgrouplist/cellgrouplist.component';
+import { SetcellgroupComponent } from './pages/cellgroup/subpages/setcellgroup/setcellgroup.component';
 
 const routes: Routes = [
   {
@@ -37,25 +40,26 @@ const routes: Routes = [
     },
     children: [
       { path: '', component: DashboardhomeComponent },
-      { 
-        path: 'users', 
+      {
+        path: 'users',
         component: UsersComponent,
         children: [
-        {
-          path: '', component: UserslistComponent
-        },
-        {
-          path: 'add', component: SetuserComponent
-        },
-        {
-          path: 'edit/:userId', component: SetuserComponent, resolve : { userData: UserResolver, userProfile: ProfileResolver }
-        },
-        {
-          path: 'view/:userId', component: UserinfoComponent
-        }
-      ] 
+          {
+            path: '', component: UserslistComponent
+          },
+          {
+            path: 'add', component: SetuserComponent
+          },
+          {
+            path: 'edit/:userId', component: SetuserComponent, resolve: { userData: UserResolver, userProfile: ProfileResolver }
+          },
+          {
+            path: 'view/:userId', component: UserinfoComponent, resolve: { userData: UserResolver, userProfile: ProfileResolver }
+          }
+        ]
       },
-      { path: 'networks', component: NetworksComponent, 
+      {
+        path: 'networks', component: NetworksComponent,
         children: [
           {
             path: '', component: NetworklistComponent
@@ -64,14 +68,30 @@ const routes: Routes = [
             path: 'add', component: SetnetworkComponent
           },
           {
-            path: 'edit/:networkId', component: SetnetworkComponent, resolve : { networkData: NetworkResolver }
+            path: 'edit/:networkId', component: SetnetworkComponent, resolve: { networkData: NetworkResolver }
           },
           {
             path: 'view/:networkId', component: ViewnetworkComponent
           }
-        ] 
+        ]
       },
-      { path: 'cellgroups', component: CellgroupComponent },
+      {
+        path: 'cellgroups', component: CellgroupComponent,
+          children: [
+            {
+              path: '', component: CellgrouplistComponent
+            },
+            {
+              path: 'add', component: SetcellgroupComponent
+            },
+            {
+              path: 'edit/:networkId', component: SetcellgroupComponent
+            },
+            {
+              path: 'view/:networkId', component: CellgroupinfoComponent
+            }
+          ]
+      },
       { path: 'vips', component: VipsComponent },
       { path: 'training', component: TrainingComponent },
       { path: 'reports', component: ReportsComponent },
@@ -83,8 +103,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forChild(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 
 export class DashboardRoutingModule { }

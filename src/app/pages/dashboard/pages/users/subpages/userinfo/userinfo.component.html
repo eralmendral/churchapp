@@ -9,10 +9,106 @@
                 <a routerLink='/dashboard/users'>Users</a>
             </nz-breadcrumb-item>
             <nz-breadcrumb-item>
-                1
+                {{userData.id}}
             </nz-breadcrumb-item>
           </nz-breadcrumb>
         </div>
       </div>
     <br>
+
+      <!-- 
+         User info
+
+profile pic
+id
+firstname lastname gender icon
+network
+cell leader
+level
+encounter batch
+phone
+email
+
+address
+workplace
+campus
+	
+training
+devotions
+posts
+analytics
+
+       -->
+<div class="row">
+  <div class="col sm-12">
+   <p>Id: {{ userData.id }}</p>
+  </div>
+  <div class="col-sm-12">
+    <img [src]="userData.profilepic" [alt]="userData.id">
+    <p>{{userData.firstname}} {{ userData.lastname}}</p>   
+    <p>{{userData?.network}}</p>
+    <p>{{userData?.cellgroup}}</p>
+    <p>{{userData?.level}}</p>
+    <p>{{userData?.encounterbatch}}</p>
+  </div>
+</div>
+
+<nz-divider nzText="Contact"></nz-divider>
+<div class="row">
+  <p>{{userData?.phone}}</p>
+  <p>{{userData?.email}}</p>
+</div>
+
+
+<nz-divider nzText="Address"></nz-divider>
+<div class="row">
+  
+</div>
+
+<nz-divider nzText="Workplace"></nz-divider>
+<div class="row">
+  <div class="col-sm-12">
+    Workplace: {{userProfile?.workplace}}
+  </div>
+</div>
+
+
+<nz-divider nzText="Campus"></nz-divider>
+<div class="row">
+  <div class="col-sm-12">
+    Campus: {{userProfile?.campus}}
+  </div>
+</div>
+
+
+<nz-divider nzText="Training"></nz-divider>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Training Records Here</h1>
+  </div>
+</div>
+
+<nz-divider nzText="Reports"></nz-divider>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Reports Records Here</h1>
+  </div>
+</div>
+
+
+<nz-divider nzText="Posts"></nz-divider>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Feeds Records Here</h1>
+  </div>
+</div>
+
+
+<nz-divider nzText="Stats"></nz-divider>
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Graph Here</h1>
+  </div>
+</div>
+
 </div>

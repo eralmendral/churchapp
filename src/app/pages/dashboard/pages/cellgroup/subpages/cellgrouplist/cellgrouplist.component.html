@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+          <nz-breadcrumb>
+            <nz-breadcrumb-item>
+             <a routerLink='/dashboard'>Dashboard</a>
+            </nz-breadcrumb-item>
+            <nz-breadcrumb-item>
+              Cell Groups
+            </nz-breadcrumb-item>
+          </nz-breadcrumb>
+        </div>
+    </div>
+    <br>
+
+    <div class="row section-title">
+        <div class="col">
+            <h1>Cell Groups</h1>
+        </div>
+
+        <div class="col">
+            <div class="d-flex  justify-content-end">
+                <!-- <button type="submit" class="btn pull-right mx-1" nz-button nzType="danger" [nzSize]="'large'"><i nz-icon nzType="export"></i>Export</button> -->
+                <button type="submit" class="btn pull-right mx-1" nz-button nzType="primary" [nzSize]="'large'"  routerLink="add"><i nz-icon nzType="user-add"></i>Add Cellgroup</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col sm">
+            <ag-grid-angular ag-grid-angular
+                style="width: 100wh; height: 80vh;"
+                class="ag-theme-alpine"
+                [rowData]="cellgroups$ | async"
+                [columnDefs]="columnDefs"
+                [defaultColDef]="defaultColDef"
+                pagination="true"
+                pageSize="10"
+                paginationAutoPageSize="false"
+                [frameworkComponents]="frameworkComponents"
+                [rowHeight]="120"
+                (firstDataRendered)="onFirstDataRendered($event)"
+            >
+            </ag-grid-angular>
+        </div> 
+    </div> 
+</div>

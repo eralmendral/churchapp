@@ -5,7 +5,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserslistComponent } from './subpages/userslist/userslist.component';
 import { RouterModule } from '@angular/router';
-import { NzFormModule } from 'ng-zorro-antd/form';
 import { UsersService } from '../../services/users.service';
 import { SharedComponentsModule } from 'src/app/sharedcomponents/sharedcomponents.module';
 import { UsersResolver } from '../../resolvers/users.resolver';
@@ -26,7 +25,6 @@ import { ProfilesResolver } from '../../resolvers/profiles.resolver';
   ],
   imports: [
     CommonModule,
-    NzFormModule,
     ReactiveFormsModule,
     RouterModule,
     FormsModule,
