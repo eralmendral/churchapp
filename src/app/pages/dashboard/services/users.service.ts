@@ -14,7 +14,8 @@ export class UsersService {
     }
 
     fetchusers(){
-        this.usersCollection = this.afs.collection<User>('users', ref => ref.where('isDeleted', '==', false));
+        // this.usersCollection = this.afs.collection<User>('users', ref => ref.where('isDeleted', '==', false));
+        this.usersCollection = this.afs.collection<User>('users'); //temporarily fetch all users
         this.users = this.usersCollection.valueChanges();
         return  this.users;
     }

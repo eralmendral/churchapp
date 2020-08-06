@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>{{mode === 'add' ? 'Add User' : 'Edit User'}}</h1>
-            <h3 *ngIf="mode === 'edit'">Id: {{userData.id}} </h3>
+            <h2 *ngIf="mode === 'edit'">Id: {{userData.id}} </h2>
         </div>
     </div>
 
@@ -33,8 +33,7 @@
                     <form nz-form [formGroup]="userForm">
                         <div formGroupName="userData">
                             <nz-form-item>
-                                <nz-form-control
-                                [hidden]="mode !== 'add'"
+                                <nz-form-control [hidden]="mode !== 'add'"
                                     [nzErrorTip]="userForm.get('userData.id').hasError('required') ? 'Field required' :  userForm.get('userData.id').hasError('idtaken') ? 'ID already taken.' : ''">
                                     <nz-input-group nzPrefixIcon="idcard">
                                         <input type="text" nz-input formControlName="id" placeholder="ID" />
@@ -217,8 +216,9 @@
                         <nz-divider nzText="Archive User"></nz-divider>
                         <div class="row">
                             <div class="col">
-                                <button (click)="showDeleteConfirm(userData.id)" class="btn pull-right mr-3" nz-button nzDanger
-                                    nzType="dashed" [nzSize]="'medium'"><i nz-icon nzType="delete"></i>Archive</button>
+                                <button (click)="showDeleteConfirm(userData.id)" class="btn pull-right mr-3" nz-button
+                                    nzDanger nzType="dashed" [nzSize]="'medium'"><i nz-icon
+                                        nzType="delete"></i>Archive</button>
                             </div>
                         </div>
 
@@ -243,8 +243,46 @@
         <div class="col-md-6">
             <nz-divider nzText="Preview"></nz-divider>
             <div class="row">
+                <div class="col d-flex">
+                    <img [src]="imageSrc ? imageSrc : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'"
+                        class="profile-pic mr-3">
+                    <div class="row">
+                        <div class="col">
+                            <h2 *ngIf="userForm.get('userData.id').value"><fa-icon class="mr-2 grey" [icon]="faAddressCard"></fa-icon>{{userForm.get('userData.id').value}}</h2>
+                            <h2>{{userForm.get('userData.firstname').value}} {{userForm.get('userData.lastname').value}}</h2>
+                            <h2 *ngIf="userForm.get('userData.gender').value === 'male'"><fa-icon class="mr-2 blue"  size="medium" [icon]="faMale"></fa-icon></h2>
+                            <h2 *ngIf="userForm.get('userData.gender').value === 'female'"><fa-icon class="mr-2 red"  size="medium" [icon]="faFemale"></fa-icon></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
                 <div class="col">
-                    <img [src]="imageSrc" *ngIf="imageSrc" class="profile-pic">
+                    <h2><fa-icon class="mr-2 grey" [icon]="faProjectDiagram"></fa-icon> 
+                        {{networksMap[userForm.get('userData.network').value] ? networksMap[userForm.get('userData.network').value] : ''}}
+                    </h2>
+                    <h2><fa-icon class="mr-2 grey" [icon]="faUsers"></fa-icon>
+                        {{usersMap[userForm.get('userData.cellgroup').value] ? usersMap[userForm.get('userData.cellgroup').value] : ''}}
+                    </h2>
+                    <h2><fa-icon class="mr-2 grey" [icon]="faLayerGroup"></fa-icon> {{userForm.get('userData.level').value}} </h2>
+                    <h2><fa-icon class="mr-2 grey" [icon]="faGraduationCap"></fa-icon> {{userForm.get('userData.encounterbatch').value}}</h2>
+                </div>
+            </div>
+
+            <nz-divider nzText=""></nz-divider>
+            <div class="row">
+                <div class="col">
+                    <h2><fa-icon class="mr-2 grey" [icon]="faPhone"></fa-icon>     {{userForm.get('userData.phone').value}} </h2>
+                    <h2><fa-icon class="mr-2 grey" [icon]="faEnvelope"></fa-icon>   {{userForm.get('userData.email').value}}</h2>
+                    <h2><fa-icon class="mr-2 grey" [icon]="faHome"></fa-icon> 
+                        <span> {{userForm.get('userProfile.address.unit').value}}</span>
+                        <span> {{userForm.get('userProfile.address.street').value}}</span>
+                        <span> {{userForm.get('userProfile.address.barangay').value}}</span>
+                        <span> {{userForm.get('userProfile.address.city').value}}</span>
+                    </h2>
+                    <h2><fa-icon class="mr-2 grey" [icon]="faBuilding"></fa-icon> {{userForm.get('userProfile.workplace').value}}</h2>
+                    <h2><fa-icon class="mr-2 grey" [icon]="faSchool"></fa-icon>    {{userForm.get('userProfile.campus').value}}</h2>
                 </div>
             </div>
         </div>

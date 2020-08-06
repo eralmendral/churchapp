@@ -1,6 +1,5 @@
 import { removeUser } from './../../../../dashboard.actions';
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
 import { Store, select } from '@ngrx/store';
 import { DashboardState } from 'src/app/pages/dashboard/reducers';
 import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
@@ -8,6 +7,7 @@ import { selectUsers, selectCellgroups, selectNetworks } from 'src/app/pages/das
 import { addUser, updateUser, addProfile, updateProfile } from 'src/app/pages/dashboard/dashboard.actions';
 import { ActivatedRoute } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { faSchool, faBuilding, faHome, faEnvelope, faPhone, faGraduationCap, faLayerGroup, faUsers, faProjectDiagram , faMale, faFemale, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-setuser',
@@ -19,11 +19,26 @@ export class SetuserComponent implements OnInit {
   cellgroups$;
   users$;
   usersMap = {};
+  networksMap = {};
   imageSrc;
   userForm;
   userData;
   userProfile;
   mode = 'add';   // edit || add
+
+  // fontawesome icons
+  faSchool = faSchool;
+  faBuilding = faBuilding;
+  faHome = faHome;
+  faEnvelope = faEnvelope;
+  faPhone = faPhone;
+  faGraduationCap = faGraduationCap;
+  faLayerGroup = faLayerGroup;
+  faProjectDiagram = faProjectDiagram;
+  faUsers = faUsers;
+  faMale = faMale;
+  faFemale = faFemale;
+  faAddressCard = faAddressCard;
 
   constructor(private store: Store<DashboardState>,
     private route: ActivatedRoute,
@@ -48,8 +63,8 @@ export class SetuserComponent implements OnInit {
         id: [routeData ? this.userData.id : '', [Validators.required], uniqueIdValidator],
         network: [routeData ? this.userData.network : '', Validators.required],
         cellgroup: [routeData ? this.userData.cellgroup : '', Validators.required],
-        encounterbatch: [routeData ? this.userData.encounterbatch : '', Validators.required],
-        level: [routeData ? this.userData.level : '', Validators.required],
+        encounterbatch: [routeData ? this.userData.encounterbatch : ''],
+        level: [routeData ? this.userData.level : ''],
         firstname: [routeData ? this.userData.firstname : '', Validators.required],
         lastname: [routeData ? this.userData.lastname : '', Validators.required],
         gender: [routeData ? this.userData.gender : '', Validators.required],
@@ -76,8 +91,14 @@ export class SetuserComponent implements OnInit {
       })
     });
 
+    this.store.pipe(select(selectNetworks)).subscribe(networkData => {
+      networkData.forEach(network => {
+        this.networksMap[network.id] = network.name;
+      })
+    });
+
     this.cellgroups$ = this.store.pipe(select(selectCellgroups));
-    this.networks$ = this.store.pipe(select(selectNetworks))
+    this.networks$ = this.store.pipe(select(selectNetworks));
   }
 
   saveUser() {
@@ -86,14 +107,16 @@ export class SetuserComponent implements OnInit {
       userid: this.userForm.get('userData.id').value
     }
 
-    // dispatch add user 
-    if (this.mode === 'add') {
-      this.store.dispatch(addUser({ user: this.userForm.get('userData').value}));
-      this.store.dispatch(addProfile({profile: profileData}))
-    } else if (this.mode === 'edit') {
-      this.store.dispatch(updateUser({user: this.userForm.get('userData').value}));
-      this.store.dispatch(updateProfile({profile: profileData}))
-    }
+    console.log(this.userForm.get('userData.firstname'))
+
+    // // dispatch add user 
+    // if (this.mode === 'add') {
+    //   this.store.dispatch(addUser({ user: this.userForm.get('userData').value }));
+    //   this.store.dispatch(addProfile({ profile: profileData }))
+    // } else if (this.mode === 'edit') {
+    //   this.store.dispatch(updateUser({ user: this.userForm.get('userData').value }));
+    //   this.store.dispatch(updateProfile({ profile: profileData }))
+    // }
   }
 
   readURL(event: Event): void {
@@ -128,7 +151,7 @@ export class SetuserComponent implements OnInit {
       nzOkText: 'Yes',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.store.dispatch(removeUser({ userId : userId}))
+        this.store.dispatch(removeUser({ userId: userId }))
       },
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
