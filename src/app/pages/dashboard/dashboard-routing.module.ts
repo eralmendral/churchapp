@@ -27,6 +27,7 @@ import { NetworkResolver } from './resolvers/network.resolver';
 import { CellgroupinfoComponent } from './pages/cellgroup/subpages/cellgroupinfo/cellgroupinfo.component';
 import { CellgrouplistComponent } from './pages/cellgroup/subpages/cellgrouplist/cellgrouplist.component';
 import { SetcellgroupComponent } from './pages/cellgroup/subpages/setcellgroup/setcellgroup.component';
+import { VipslistComponent } from './pages/vips/subpages/vipslist/vipslist.component';
 
 const routes: Routes = [
   {
@@ -92,7 +93,12 @@ const routes: Routes = [
             }
           ]
       },
-      { path: 'vips', component: VipsComponent },
+      { path: 'vips', component: VipsComponent, children: [
+        {
+          path: '', component: VipslistComponent
+        },
+      ]
+     },
       { path: 'training', component: TrainingComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'bookings', component: BookingComponent },

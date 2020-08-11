@@ -35,6 +35,7 @@ import en from '@angular/common/locales/en';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
 import { CellgroupEffects } from './effects/cellgroups.effects';
 import { CellgroupModule } from './pages/cellgroup/cellgroup.module';
+import { VipsModule } from './pages/vips/vips.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CellgroupModule } from './pages/cellgroup/cellgroup.module';
     RouterModule,
     NetworksModule,
     UsersModule,
-    CellgroupModule,  
+    CellgroupModule,
+    VipsModule,
     DashboardRoutingModule,
     SharedComponentsModule,
     IconsProviderModule,

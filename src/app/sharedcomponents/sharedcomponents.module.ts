@@ -25,6 +25,9 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 import { NetworkLeaderRendererComponent } from './aggrid-renderers-components/agrenderer-networkleader.component';
 @NgModule({
   declarations: [
@@ -57,7 +60,9 @@ import { NetworkLeaderRendererComponent } from './aggrid-renderers-components/ag
     NzButtonModule,
     NzDividerModule,
     NzBreadCrumbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NzCardModule,
+    NgxChartsModule
   ],
   providers: [NzModalService]
 })
