@@ -110,13 +110,13 @@ export class SetuserComponent implements OnInit {
     console.log(this.userForm.get('userData.firstname'))
 
     // // dispatch add user 
-    // if (this.mode === 'add') {
-    //   this.store.dispatch(addUser({ user: this.userForm.get('userData').value }));
-    //   this.store.dispatch(addProfile({ profile: profileData }))
-    // } else if (this.mode === 'edit') {
-    //   this.store.dispatch(updateUser({ user: this.userForm.get('userData').value }));
-    //   this.store.dispatch(updateProfile({ profile: profileData }))
-    // }
+    if (this.mode === 'add') {
+      this.store.dispatch(addUser({ user: this.userForm.get('userData').value }));
+      this.store.dispatch(addProfile({ profile: profileData }))
+    } else if (this.mode === 'edit') {
+      this.store.dispatch(updateUser({ user: this.userForm.get('userData').value }));
+      this.store.dispatch(updateProfile({ profile: profileData }))
+    }
   }
 
   readURL(event: Event): void {
