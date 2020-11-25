@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "churchapp",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authchurchapp62bbc2aa",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
