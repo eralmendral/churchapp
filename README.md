@@ -1,27 +1,12 @@
-# Churchapp
+# Church Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+<h3>Demo user</h3>
+<p>username:   'lowwm@admin.com'</p>
+<p>password: 'password' </p>
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Initial Architecture
+- Current website : https://lowwm.org
+- Demo Backend Link : <a href="https://congregation-suite.vercel.app/dashboard/users">URL Demo</a>
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+<img src="https://firebasestorage.googleapis.com/v0/b/mysite-a8cf4.appspot.com/o/be960c20-cb20-435c-a0e8-c1418f9efe64%2Fthumbnail%2F0be960c20-cb20-435c-a0e8-c1418f9efe64%2FArchitecture.png?alt=media&token=7d8e70e6-661f-4a75-91cc-acf303fd4b89" />
